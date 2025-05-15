@@ -54,7 +54,7 @@ namespace CurConvApp.Views {
                 return;
             }
             _contentLoaded = true;
-            System.Uri resourceLocater = new System.Uri("/CurConvApp;V1.0.0.0;component/views/registrationview.xaml", System.UriKind.Relative);
+            System.Uri resourceLocater = new System.Uri("/CurConvApp;component/views/registrationview.xaml", System.UriKind.Relative);
             
             #line 1 "..\..\..\..\Views\RegistrationView.xaml"
             System.Windows.Application.LoadComponent(this, resourceLocater);

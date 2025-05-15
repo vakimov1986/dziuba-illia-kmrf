@@ -2,6 +2,58 @@
 # This .gitignore file was automatically created by Microsoft(R) Visual Studio.
 ################################################################################
 
-/.vs/dziuba-illia-kmrf/FileContentIndex
-/.vs/dziuba-illia-kmrf/v17
-/.vs
+
+## Visual Studio стандарт ##
+.vs/
+*.suo
+*.user
+*.userosscache
+*.sln.docstates
+
+## Build папки ##
+[Bb]in/
+[Oo]bj/
+*.dll
+*.exe
+*.app
+*.log
+
+## Temporary Files ##
+*.cache
+*.dbmdl
+*.pidb
+*.pdb
+*.mdb
+*.ilk
+*.idb
+*.sdf
+*.opensdf
+
+## Test Results ##
+TestResults/
+
+## NuGet Packages ##
+*.nupkg
+*.snupkg
+packages/
+*.nuspec
+
+## Entity Framework Migrations History ##
+Migrations/
+
+## Бази даних (mdf, ldf) - не зберігати у Git ##
+*.mdf
+*.ldf
+
+## Logs ##
+*.log
+
+## User Secret Files ##
+secrets.json
+
+## Publish Profiles ##
+Properties/PublishProfiles/
+
+## JetBrains Rider ##
+.idea/
+*.sln.iml

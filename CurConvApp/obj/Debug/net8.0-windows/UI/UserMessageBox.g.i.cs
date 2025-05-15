@@ -53,7 +53,7 @@ namespace CurConvApp.UI {
                 return;
             }
             _contentLoaded = true;
-            System.Uri resourceLocater = new System.Uri("/CurConvApp;component/ui/usermessagebox.xaml", System.UriKind.Relative);
+            System.Uri resourceLocater = new System.Uri("/CurConvApp;V1.0.0.0;component/ui/usermessagebox.xaml", System.UriKind.Relative);
             
             #line 1 "..\..\..\..\UI\UserMessageBox.xaml"
             System.Windows.Application.LoadComponent(this, resourceLocater);
