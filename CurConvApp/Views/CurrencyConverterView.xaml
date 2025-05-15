@@ -1,0 +1,123 @@
+﻿<UserControl x:Class="CurConvApp.Views.CurrencyConverterView"
+             xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+             xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+             xmlns:vm="clr-namespace:CurConvApp.ViewModels"
+             xmlns:converters="clr-namespace:CurConvApp.Converters"
+             xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+             xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+             mc:Ignorable="d">
+
+    <UserControl.DataContext>
+        <vm:CurrencyConverterViewModel />
+    </UserControl.DataContext>
+
+    <UserControl.Resources>
+        <converters:LowercaseToImagePathConverter x:Key="LowercaseToImagePathConverter"/>
+    </UserControl.Resources>
+
+
+    <StackPanel Margin="10" Orientation="Vertical" HorizontalAlignment="Left">
+
+        <!-- Кнопка ручного завантаження -->
+        <Button Content="Завантажити курси НБУ (ручне)"
+                Command="{Binding LoadRatesCommand}"
+                Width="250"
+                Margin="0,0,0,10"/>
+        
+        <TextBlock Text="{Binding TimeLeft}"
+           Foreground="Gray"
+           FontWeight="Bold"
+           FontSize="12"
+           Margin="0,10,0,0"/>
+
+        <StackPanel Orientation="Horizontal" Margin="0,0,0,10">
+            <TextBlock Text="Сума:" VerticalAlignment="Center" Margin="0,0,5,0"/>
+            <TextBox Width="100" Text="{Binding InputAmount, UpdateSourceTrigger=PropertyChanged}" Margin="0,0,10,0"/>
+
+            <ComboBox Width="100"
+                      ItemsSource="{Binding CurrencyRates}"
+                      SelectedItem="{Binding FromCurrency}"
+                      DisplayMemberPath="CurrencyCodeL"
+                      Margin="0,0,10,0"/>
+
+            <TextBlock Text="→" VerticalAlignment="Center" Margin="0,0,10,0"/>
+
+            <ComboBox Width="100"
+                      ItemsSource="{Binding CurrencyRates}"
+                      SelectedItem="{Binding ToCurrency}"
+                      DisplayMemberPath="CurrencyCodeL"/>
+        </StackPanel>
+
+        <!-- Кнопка конвертації -->
+        <Button Content="Конвертувати"
+                Width="120"
+                Command="{Binding ConvertCommand}"
+                Margin="0,0,0,10"/>
+        
+        <!-- Виведення результату конвертації -->
+        <TextBlock FontWeight="Bold"
+                   FontSize="14"
+                   Text="{Binding ConversionResult}"
+                   Foreground="DarkGreen"/>
+
+        <!-- Статусне повідомлення -->
+        <TextBlock Text="{Binding StatusMessage}"
+                   Foreground="DarkBlue"
+                   FontWeight="Bold"
+                   FontSize="12"
+                   Margin="0,10,0,0"/>
+
+
+
+
+
+
+
+
+        <ListView ItemsSource="{Binding CurrencyRates}" Margin="10">
+            <ListView.Resources>
+                <!-- Візуальний стиль заголовків -->
+                <Style TargetType="GridViewColumnHeader">
+                    <Setter Property="FontWeight" Value="Bold" />
+                    <Setter Property="Foreground" Value="DarkBlue" />
+                    <Setter Property="FontSize" Value="14"/>
+                </Style>
+                <!-- Ефекти наведення -->
+                <Style TargetType="ListViewItem">
+                    <Setter Property="Background" Value="Transparent"/>
+                    <Setter Property="Cursor" Value="Hand"/>
+                    <Setter Property="Margin" Value="2"/>
+                    <Style.Triggers>
+                        <Trigger Property="IsMouseOver" Value="True">
+                            <Setter Property="Background" Value="#FFE0F7FF"/>
+                        </Trigger>
+                    </Style.Triggers>
+                </Style>
+            </ListView.Resources>
+
+            <ListView.View>
+                <GridView>
+                    <!-- Валюта + прапор -->
+                    <GridViewColumn Header="Валюта" Width="140">
+                        <GridViewColumn.CellTemplate>
+                            <DataTemplate>
+                                <StackPanel Orientation="Horizontal" VerticalAlignment="Center">
+                                    <Image Width="32" Height="20" Margin="0,0,5,0"
+                                    Source="{Binding CurrencyCodeL, Converter={StaticResource LowercaseToImagePathConverter}}" />
+
+                                    <TextBlock Text="{Binding CurrencyCodeL}" VerticalAlignment="Center"/>
+                                </StackPanel>
+                            </DataTemplate>
+                        </GridViewColumn.CellTemplate>
+                    </GridViewColumn>
+
+                    <GridViewColumn Header="Кількість" Width="100" DisplayMemberBinding="{Binding Units}" />
+                    <GridViewColumn Header="Курс (грн)" Width="100" DisplayMemberBinding="{Binding Amount, StringFormat=0.00}" />
+                    <GridViewColumn Header="Дата" Width="120" DisplayMemberBinding="{Binding StartDate}" />
+                </GridView>
+            </ListView.View>
+        </ListView>
+
+
+    </StackPanel>
+</UserControl>
