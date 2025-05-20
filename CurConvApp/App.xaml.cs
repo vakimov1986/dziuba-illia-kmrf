@@ -2,7 +2,7 @@
 using System.Data;
 using Microsoft.Extensions.Configuration;
 using System.Windows;
-using System;
+using System.Threading.Tasks;
 
 namespace CurConvApp
 {
@@ -13,8 +13,7 @@ namespace CurConvApp
     {
         public static IConfiguration AppConfiguration { get; private set; } = null!;
 
-
-        protected override void OnStartup(StartupEventArgs e)
+        protected override async void OnStartup(StartupEventArgs e)
         {
             base.OnStartup(e);
 
@@ -22,6 +21,19 @@ namespace CurConvApp
                 .SetBasePath(AppContext.BaseDirectory)
                 .AddJsonFile("appsettings.json", optional: false, reloadOnChange: true)
                 .Build();
+
+            // Показати SplashWindow
+            var splash = new SplashWindow();
+            splash.Show();
+
+            // Затримка (наприклад, 5 сек)
+            await Task.Delay(10000);
+
+            splash.Close();
+
+            // Запуск головного вікна
+            var main = new MainWindow();
+            main.Show();
         }
     }
 }

@@ -1,0 +1,28 @@
+﻿<Window x:Class="CurConvApp.SplashWindow"
+        xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+        xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+        xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+        xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+        xmlns:local="clr-namespace:CurConvApp"
+        mc:Ignorable="d"
+        
+        
+        Title="SplashWindow" 
+         WindowStyle="None"
+    AllowsTransparency="True"
+    Background="Transparent"
+    ResizeMode="NoResize"
+    ShowInTaskbar="False"
+    WindowStartupLocation="CenterScreen"
+    Width="400" Height="350">
+    <Border CornerRadius="16" Padding="20" Background="White">
+        <StackPanel VerticalAlignment="Center" HorizontalAlignment="Center">
+            <TextBlock Text="ВСП Київський фаховий коледж морського і річкового флоту та транспортних технологій НТУ" FontSize="12" TextWrapping="Wrap" Margin="6" TextAlignment="Center"/>
+            <Image Source="/Views/splash.jpg" Width="350" Margin="0,0,0,0" Height="193"/>
+            <TextBlock Text="Currency Converter App" FontWeight="Bold" FontSize="20" HorizontalAlignment="Center" Margin="0,0,0,6"/>
+            <TextBlock Text="created by Illia Dziuba in cooperation with Vladyslav Akimov" HorizontalAlignment="Center" Margin="0,0,0,0"/>
+
+            <TextBlock Text="Завантаження..." Margin="0,0,0,0" Foreground="Gray" HorizontalAlignment="Center"/>
+        </StackPanel>
+    </Border>
+</Window>

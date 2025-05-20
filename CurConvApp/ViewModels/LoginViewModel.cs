@@ -1,42 +1,40 @@
 ﻿using CommunityToolkit.Mvvm.ComponentModel;
 using CommunityToolkit.Mvvm.Input;
 using CurConvApp.Models;
+using CurConvApp.Services;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.Extensions.Configuration;
 using System.Windows;
 
 namespace CurConvApp.ViewModels
 {
-    public partial class RegistrationViewModel : ObservableObject
+    public partial class LoginViewModel : ObservableObject
     {
-        [ObservableProperty] private string name = string.Empty;
-        [ObservableProperty] private string surname = string.Empty;
         [ObservableProperty] private string email = string.Empty;
         [ObservableProperty] private string password = string.Empty;
         [ObservableProperty] private string message = string.Empty;
 
-        
-        //конструктор
+       // Конструктор
         private readonly Action<string> _navigate;
 
-        public RegistrationViewModel(Action<string> navigate)
+        public LoginViewModel(Action<string> navigate)
         {
             _navigate = navigate;
         }
 
 
         [RelayCommand]
-        private void GoToLogin()
+        private void GoToRegister()
         {
-            _navigate("Login");
+            _navigate("Register");
         }
 
         [RelayCommand]
-        private void Register()
+        private void Login()
         {
             if (string.IsNullOrWhiteSpace(Email) || string.IsNullOrWhiteSpace(Password))
             {
-                Message = "Email і пароль обов’язкові.";
+                Message = "Уведіть email і пароль.";
                 return;
             }
 
@@ -47,23 +45,17 @@ namespace CurConvApp.ViewModels
             using var db = new AppDbContext(options);
             var service = new Services.UserService(db);
 
-            var success = service.RegisterUser(new DbUser
+            var user = service.AuthenticateUser(Email, Password);
+            if (user != null)
             {
-                Name = Name,
-                Surname = Surname,
-                Email = Email,
-                PasswordHash = Password
-            });
-
-            if (success)
-            {
-                Message = "Реєстрація успішна!";
+                Message = "Вхід успішний.";
                 _navigate("Converter"); // ПЕРЕХІД до конвертера
             }
             else
             {
-                Message = "Користувач з таким email вже існує.";
+                Message = "Невірний email або пароль.";
             }
         }
+
     }
 }

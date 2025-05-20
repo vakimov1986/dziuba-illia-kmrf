@@ -20,6 +20,7 @@
     <None Remove="Assets\Flags\ron.png" />
     <None Remove="Assets\Flags\sek.png" />
     <None Remove="Assets\Flags\usd.png" />
+    <None Remove="Views\splash.jpg" />
   </ItemGroup>
 
   <ItemGroup>
@@ -75,6 +76,7 @@
     <Resource Include="Assets\Flags\sek.png">
       <CopyToOutputDirectory>Never</CopyToOutputDirectory>
     </Resource>
+    <Resource Include="Views\splash.jpg" />
   </ItemGroup>
 
 </Project>

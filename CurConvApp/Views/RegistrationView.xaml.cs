@@ -21,15 +21,20 @@ namespace CurConvApp.Views
     /// </summary>
     public partial class RegistrationView : UserControl
     {
-        public RegistrationView()
+        public RegistrationView(Action<string> navigate)
         {
             InitializeComponent();
-            DataContext = new RegistrationViewModel(); //альтернативно (і краще при тестуванні) — встановлювати DataContext у .cs
+            DataContext = new RegistrationViewModel(navigate); // предача параметру
         }
 
-        public  void Button_Click(object sender, RoutedEventArgs e)
+        private void PasswordBox_PasswordChanged(object sender, RoutedEventArgs e)
         {
-
+            if (this.DataContext is RegistrationViewModel vm)
+            {
+                vm.Password = ((PasswordBox)sender).Password;
+            }
         }
+
+
     }
 }

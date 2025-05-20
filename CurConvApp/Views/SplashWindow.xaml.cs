@@ -10,20 +10,18 @@ using System.Windows.Documents;
 using System.Windows.Input;
 using System.Windows.Media;
 using System.Windows.Media.Imaging;
-using System.Windows.Navigation;
 using System.Windows.Shapes;
-using CurConvApp.ViewModels;
 
-
-namespace CurConvApp.Views
+namespace CurConvApp
 {
-    public partial class CurrencyConverterView : UserControl
+    /// <summary>
+    /// Interaction logic for SplashWindow.xaml
+    /// </summary>
+    public partial class SplashWindow : Window
     {
-        public CurrencyConverterView()
+        public SplashWindow()
         {
             InitializeComponent();
-            DataContext = new CurrencyConverterViewModel();
-
         }
     }
 }
