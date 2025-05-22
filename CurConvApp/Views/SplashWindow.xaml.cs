@@ -12,7 +12,7 @@ using System.Windows.Media;
 using System.Windows.Media.Imaging;
 using System.Windows.Shapes;
 
-namespace CurConvApp
+namespace CurConvApp.Views
 {
     /// <summary>
     /// Interaction logic for SplashWindow.xaml

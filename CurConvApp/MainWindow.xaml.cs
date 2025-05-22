@@ -2,6 +2,7 @@
 using System.Windows;
 using CurConvApp.Views;
 using CurConvApp.ViewModels;
+using System.Windows.Threading;
 
 namespace CurConvApp
 {
@@ -9,10 +10,21 @@ namespace CurConvApp
     {
         public MainWindow()
         {
-            InitializeComponent();
-            ShowLogin();
+           InitializeComponent();
+           ShowSplashOverlay();
+           ShowLogin();
         }
-
+        private void ShowSplashOverlay()
+        {
+            var timer = new DispatcherTimer();
+            timer.Interval = TimeSpan.FromSeconds(3); // тривалість splash
+            timer.Tick += (s, a) =>
+            {
+                timer.Stop();
+                SplashOverlay.Visibility = Visibility.Collapsed;
+            };
+            timer.Start();
+        }
         private void ShowLogin()
         {
             var view = new LoginView(NavigateTo);
@@ -36,7 +48,7 @@ namespace CurConvApp
             MainContent.Content = view;
         }
 
-        private void NavigateTo(string target)
+        public void NavigateTo(string target)
         {
             switch (target)
             {

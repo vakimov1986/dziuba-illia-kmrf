@@ -1,15 +1,46 @@
 ﻿<Window x:Class="CurConvApp.MainWindow"
         xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
         xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
-        xmlns:views="clr-namespace:CurConvApp.Views"
-        
+        Title="Currency Converter App"
         SizeToContent="WidthAndHeight"
-        MinWidth="350"
-        MinHeight="300"
-        WindowStartupLocation="CenterScreen"
-        Title="Currency Converter App">
-
+        MinWidth="350" MinHeight="300"
+        WindowStartupLocation="CenterScreen">
+    
     <Grid>
+        <!-- Основний контент вікна -->
         <ContentControl x:Name="MainContent"/>
+
+        <!-- SplashOverlay поверх основного контенту -->
+        <Grid x:Name="SplashOverlay"
+          Background="#FFFFFFFF"
+          Visibility="Visible"
+          Panel.ZIndex="10">
+            <Grid.RowDefinitions>
+                <RowDefinition Height="Auto"/>
+                <RowDefinition Height="*"/>
+                <RowDefinition Height="Auto"/>
+            </Grid.RowDefinitions>
+
+            <!-- Верхній підпис -->
+            <TextBlock Text="ВСП &quot;КФКМРФТТ НТУ&quot;"
+                   FontSize="18" FontWeight="Bold"
+                   HorizontalAlignment="Center"
+                   Margin="0,18,0,0"
+                   Grid.Row="0"/>
+
+            <!-- Основний контент Splash -->
+            <StackPanel Grid.Row="1" HorizontalAlignment="Center" VerticalAlignment="Center">
+                <TextBlock Text="Завантаження..." FontSize="28" FontWeight="Bold"/>
+                <ProgressBar IsIndeterminate="True" Height="8" Margin="0,24,0,0" Width="150"/>
+            </StackPanel>
+
+            <!-- Нижній підпис -->
+            <StackPanel Grid.Row="2" Margin="0,0,0,16" HorizontalAlignment="Center">
+                <TextBlock Text="Розробники:" FontSize="15" FontWeight="SemiBold"/>
+                <TextBlock Text="студент групи ПР-411 Ілля Дзюба" FontSize="14"/>
+                <TextBlock Text="керівник проєкту Владислав Акімов" FontSize="14"/>
+            </StackPanel>
+        </Grid>
     </Grid>
+
 </Window>

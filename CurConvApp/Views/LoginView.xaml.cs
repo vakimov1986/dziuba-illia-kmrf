@@ -8,9 +8,11 @@ namespace CurConvApp.Views
     {
         public LoginView(Action<string> navigate)
         {
+          //  MessageBox.Show("LoginView constructor called");
             InitializeComponent();
-            DataContext = new LoginViewModel(navigate); // передаємо параметр
+           // DataContext = new LoginViewModel(navigate);
         }
+
 
 
         private void PasswordBox_PasswordChanged(object sender, RoutedEventArgs e)
