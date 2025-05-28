@@ -23,15 +23,17 @@
 
             <!-- Верхній підпис -->
             <TextBlock Text="ВСП &quot;КФКМРФТТ НТУ&quot;"
-                   FontSize="18" FontWeight="Bold"
+                   FontSize="14" FontWeight="Bold"
                    HorizontalAlignment="Center"
-                   Margin="0,18,0,0"
+                   Margin="0,12,0,0"
                    Grid.Row="0"/>
 
             <!-- Основний контент Splash -->
             <StackPanel Grid.Row="1" HorizontalAlignment="Center" VerticalAlignment="Center">
-                <TextBlock Text="Завантаження..." FontSize="28" FontWeight="Bold"/>
-                <ProgressBar IsIndeterminate="True" Height="8" Margin="0,24,0,0" Width="150"/>
+                <!-- Логотип або інше зображення -->
+                <Image Source="/Assets/splash.jpg" Height="130"/>
+                <TextBlock Text="Currency Converter App" FontSize="24" FontWeight="Bold"/>
+                <ProgressBar IsIndeterminate="True" Height="8" Margin="0,6,0,0" Width="150"/>
             </StackPanel>
 
             <!-- Нижній підпис -->

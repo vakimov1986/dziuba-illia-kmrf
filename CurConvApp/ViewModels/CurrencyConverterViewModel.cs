@@ -1,12 +1,13 @@
-﻿using CurConvApp.Models;
-using CurConvApp.Services;
+﻿using System.Collections.Generic;
+using System.Collections.ObjectModel;
+using System.Linq;
+using System.Threading.Tasks;
+using System.Windows;
+using System.Windows.Threading;
 using CommunityToolkit.Mvvm.ComponentModel;
 using CommunityToolkit.Mvvm.Input;
-using System.Collections.ObjectModel;
-using System.Threading.Tasks;
-using System.Linq;
-using System.Collections.Generic;
-using System.Windows.Threading;
+using CurConvApp.Models;
+using CurConvApp.Services;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.Extensions.Configuration;
 
@@ -101,6 +102,27 @@ namespace CurConvApp.ViewModels
 
             ConversionResult = $"{amount} {FromCurrency.CurrencyCodeL} = {result:F2} {ToCurrency.CurrencyCodeL}";
         }
+
+
+        [RelayCommand]
+        private void ShowChart()
+        {
+            // Дати, які треба вибрати (наприклад, останній місяць)
+            var currency = FromCurrency?.CurrencyCodeL ?? "USD";
+            var start = DateTime.Now.AddMonths(-1);
+            var end = DateTime.Now;
+
+            var chartView = new Views.CurrencyRateChartView(currency, start, end);
+            var window = new Window
+            {
+                Title = $"Динаміка курсу {currency}",
+                Content = chartView,
+                Width = 700,
+                Height = 400
+            };
+            window.ShowDialog();
+        }
+
 
         /// <summary>
         /// Єдиний DRY метод для обох режимів

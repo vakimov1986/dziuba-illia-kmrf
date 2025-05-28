@@ -23,7 +23,13 @@
                 Command="{Binding LoadRatesCommand}"
                 Width="250"
                 Margin="0,0,0,10"/>
-        
+
+        <Button Content="Показати графік" 
+                Command="{Binding ShowChartCommand}" 
+                Width="250"
+                Margin="0,0,0,10"/>
+
+
         <TextBlock Text="{Binding TimeLeft}"
            Foreground="Gray"
            FontWeight="Bold"
