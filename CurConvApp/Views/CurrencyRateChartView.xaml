@@ -3,6 +3,23 @@
              xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
              xmlns:oxy="http://oxyplot.org/wpf">
     <Grid>
-        <oxy:PlotView Model="{Binding ChartModel}" />
+        <Grid.RowDefinitions>
+            <RowDefinition Height="Auto"/>
+            <RowDefinition Height="*"/>
+        </Grid.RowDefinitions>
+
+        <StackPanel Orientation="Horizontal" Margin="10" Grid.Row="0" HorizontalAlignment="Center" VerticalAlignment="Center">
+            <TextBlock Text="Валюта:" VerticalAlignment="Center"/>
+            <ComboBox ItemsSource="{Binding AllowedCurrencies}" SelectedItem="{Binding CurrencyCode}" Width="80" />
+            <TextBlock Text="З:" VerticalAlignment="Center" Margin="10,0,0,0"/>
+            <DatePicker SelectedDate="{Binding StartDate}" Width="120"/>
+            <TextBlock Text="По:" VerticalAlignment="Center" Margin="10,0,0,0"/>
+            <DatePicker SelectedDate="{Binding EndDate}" Width="120"/>
+            <Button Content="Експортувати в PDF" Command="{Binding ExportPdfCommand}" HorizontalAlignment="Right" Margin="10"/>
+
+            <!--<Button Content="Побудувати" Command="{Binding LoadChartCommand}" Margin="10,0,0,0"/>-->
+        </StackPanel>
+
+        <oxy:PlotView Grid.Row="1" Model="{Binding ChartModel}" Margin="10"/>
     </Grid>
 </UserControl>

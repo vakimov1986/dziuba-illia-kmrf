@@ -107,21 +107,17 @@ namespace CurConvApp.ViewModels
         [RelayCommand]
         private void ShowChart()
         {
-            // Дати, які треба вибрати (наприклад, останній місяць)
-            var currency = FromCurrency?.CurrencyCodeL ?? "USD";
-            var start = DateTime.Now.AddMonths(-1);
-            var end = DateTime.Now;
-
-            var chartView = new Views.CurrencyRateChartView(currency, start, end);
-            var window = new Window
+            var chartView = new Views.CurrencyRateChartView();
+            var window = new System.Windows.Window
             {
-                Title = $"Динаміка курсу {currency}",
+                Title = "Графік зміни курсу",
                 Content = chartView,
-                Width = 700,
-                Height = 400
+                Width = 800,
+                Height = 500
             };
             window.ShowDialog();
         }
+
 
 
         /// <summary>
