@@ -19,7 +19,6 @@ namespace CurConvApp
                 .Build();
 
             var main = new MainWindow();
-            this.MainWindow = main;
             main.Show();
         }
     }
