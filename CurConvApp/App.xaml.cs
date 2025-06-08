@@ -10,6 +10,8 @@ namespace CurConvApp
 
         protected override void OnStartup(StartupEventArgs e)
         {
+            WPFLocalizeExtension.Engine.LocalizeDictionary.Instance.Culture = new System.Globalization.CultureInfo("uk"); // або "en"
+
             base.OnStartup(e);
 
             // Завантаження конфігурації (якщо треба)

@@ -35,7 +35,7 @@ namespace CurConvApp
         private void ShowSplashOverlay()
         {
             var timer = new DispatcherTimer();
-            timer.Interval = TimeSpan.FromSeconds(0); // тривалість splash
+            timer.Interval = TimeSpan.FromSeconds(3); // тривалість splash
             timer.Tick += (s, a) =>
             {
                 timer.Stop();
