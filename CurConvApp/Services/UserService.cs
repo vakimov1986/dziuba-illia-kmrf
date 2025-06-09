@@ -1,4 +1,5 @@
 ﻿using CurConvApp.Models;
+using BCrypt.Net;
 using Microsoft.EntityFrameworkCore;
 
 namespace CurConvApp.Services
@@ -17,7 +18,7 @@ namespace CurConvApp.Services
             if (_context.Users.Any(u => u.Email == user.Email))
                 return false;
 
-            user.PasswordHash = HashPassword(user.PasswordHash);
+            user.PasswordHash = BCrypt.Net.BCrypt.HashPassword(user.PasswordHash); // user.PasswordHash містить відкритий пароль
             _context.Users.Add(user);
             _context.SaveChanges();
             return true;
@@ -26,7 +27,7 @@ namespace CurConvApp.Services
         public DbUser? AuthenticateUser(string email, string password)
         {
             var user = _context.Users.FirstOrDefault(u => u.Email == email);
-            if (user != null && user.PasswordHash == HashPassword(password))
+            if (user != null && PasswordHelper.VerifyPassword(password, user.PasswordHash))
                 return user;
             return null;
         }

@@ -118,22 +118,160 @@
     <value>System.Resources.ResXResourceWriter, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
   </resheader>
   <data name="AppTitle" xml:space="preserve">
-    <value>Automated Currency Accounting and Conversion</value>
+    <value>Automated Currency Accounting &amp; Conversion</value>
+    <comment>MainWindow</comment>
   </data>
   <data name="CollegeName" xml:space="preserve">
-    <value>SSU KFKMRFTT NTU</value>
+    <value>SSU "KPCMRFTT NTU"</value>
+    <comment>MainWindow</comment>
+  </data>
+  <data name="Create_an_account" xml:space="preserve">
+    <value>Create an account</value>
+    <comment>LoginView</comment>
   </data>
   <data name="Developers" xml:space="preserve">
     <value>Developers:</value>
+    <comment>MainWindow</comment>
   </data>
-  <data name="Email" xml:space="preserve">
+  <data name="Email_" xml:space="preserve">
     <value>Email</value>
+    <comment>LoginView</comment>
+  </data>
+  <data name="LoginWindowName" xml:space="preserve">
+    <value>Login to the system</value>
+    <comment>LoginView</comment>
+  </data>
+  <data name="Password_" xml:space="preserve">
+    <value>Password</value>
+    <comment>LoginView</comment>
+  </data>
+  <data name="Sign_in_button" xml:space="preserve">
+    <value>Sign in</value>
+    <comment>LoginView</comment>
   </data>
   <data name="Student" xml:space="preserve">
     <value>student of group PR-411 Illia Dziuba</value>
+    <comment>MainWindow</comment>
   </data>
   <data name="Supervisor" xml:space="preserve">
     <value>project supervisor Vladyslav Akimov
 </value>
+    <comment>MainWindow</comment>
+  </data>
+  <data name="RegistrationViewName" xml:space="preserve">
+    <value>Create a new account</value>
+    <comment>RegistrationView</comment>
+  </data>
+  <data name="User_first_n" xml:space="preserve">
+    <value>First name</value>
+    <comment>RegistrationView</comment>
+  </data>
+  <data name="User_last_n" xml:space="preserve">
+    <value>Last name</value>
+    <comment>RegistrationView</comment>
+  </data>
+  <data name="Create_button" xml:space="preserve">
+    <value>Create an account</value>
+    <comment>RegistrationView</comment>
+  </data>
+  <data name="Back_button" xml:space="preserve">
+    <value>Back to login</value>
+    <comment>RegistrationView</comment>
+  </data>
+  <data name="Ent_Fname" xml:space="preserve">
+    <value>Enter first name</value>
+    <comment>RegistrationView</comment>
+  </data>
+  <data name="Ent_Lname" xml:space="preserve">
+    <value>Enter last name</value>
+    <comment>RegistrationView</comment>
+  </data>
+  <data name="Ent_Email" xml:space="preserve">
+    <value>Enter email</value>
+    <comment>RegistrationView</comment>
+  </data>
+  <data name="old_pass" xml:space="preserve">
+    <value>Old password</value>
+    <comment>UserProfileWindow</comment>
+  </data>
+  <data name="new_pass" xml:space="preserve">
+    <value>New password</value>
+    <comment>UserProfileWindow</comment>
+  </data>
+  <data name="repeat_pass" xml:space="preserve">
+    <value>Repeat password</value>
+    <comment>RegistrationView</comment>
+  </data>
+  <data name="save_butt" xml:space="preserve">
+    <value>Save</value>
+    <comment>UserProfileWindow</comment>
+  </data>
+  <data name="cancel_butt" xml:space="preserve">
+    <value>Cancel</value>
+    <comment>UserProfileWindow</comment>
+  </data>
+  <data name="UserProfileWindowName" xml:space="preserve">
+    <value>User profile</value>
+    <comment>UserProfileWindow</comment>
+  </data>
+  <data name="curr_" xml:space="preserve">
+    <value>Currency:</value>
+    <comment>CurrencyRateChartView</comment>
+  </data>
+  <data name="f_" xml:space="preserve">
+    <value>from:</value>
+    <comment>CurrencyRateChartView</comment>
+  </data>
+  <data name="t_" xml:space="preserve">
+    <value>to:</value>
+    <comment>CurrencyRateChartView</comment>
+  </data>
+  <data name="exp_pdf_butt" xml:space="preserve">
+    <value>Export to PDF</value>
+    <comment>CurrencyRateChartView</comment>
+  </data>
+  <data name="lang_" xml:space="preserve">
+    <value>Українська</value>
+    <comment>CurrencyConverterView</comment>
+  </data>
+  <data name="inf_" xml:space="preserve">
+    <value>Info</value>
+    <comment>CurrencyConverterView</comment>
+  </data>
+  <data name="d_NBU_e_r_m" xml:space="preserve">
+    <value>Download NBU exchange rates (manually)</value>
+    <comment>CurrencyConverterView</comment>
+  </data>
+  <data name="ch_th_" xml:space="preserve">
+    <value>Change theme</value>
+    <comment>CurrencyConverterView</comment>
+  </data>
+  <data name="tot_" xml:space="preserve">
+    <value>Total:</value>
+    <comment>CurrencyConverterView</comment>
+  </data>
+  <data name="am_" xml:space="preserve">
+    <value>Amount</value>
+    <comment>CurrencyConverterView</comment>
+  </data>
+  <data name="e_r" xml:space="preserve">
+    <value>Ex.rate (UAH)</value>
+    <comment>CurrencyConverterView</comment>
+  </data>
+  <data name="date_" xml:space="preserve">
+    <value>Date</value>
+    <comment>CurrencyConverterView</comment>
+  </data>
+  <data name="conv_" xml:space="preserve">
+    <value>Convert</value>
+    <comment>CurrencyConverterView</comment>
+  </data>
+  <data name="s_c_s" xml:space="preserve">
+    <value>Show course schedule</value>
+    <comment>CurrencyConverterView</comment>
+  </data>
+  <data name="curr_2" xml:space="preserve">
+    <value>Currency</value>
+    <comment>CurrencyConverterView</comment>
   </data>
 </root>

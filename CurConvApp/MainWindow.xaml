@@ -26,15 +26,15 @@
             <TextBlock Text="{lex:Loc CurConvApp:Resources:CollegeName}"
                    FontSize="14" FontWeight="Bold"
                    HorizontalAlignment="Center"
-                   Margin="0,12,0,0"
+                   Margin="0,12,0,12"
                    Grid.Row="0"/>
 
             <!-- Основний контент Splash -->
             <StackPanel Grid.Row="1" HorizontalAlignment="Center" VerticalAlignment="Center">
                 <!-- Логотип або інше зображення -->
                 <Image Source="/Assets/splash.jpg" Height="130"/>
-                <TextBlock Text="{lex:Loc CurConvApp:Resources:AppTitle}" FontSize="24" FontWeight="Bold"/>
-                <ProgressBar IsIndeterminate="True" Height="8" Margin="0,6,0,0" Width="150"/>
+                <TextBlock Text="{lex:Loc CurConvApp:Resources:AppTitle}" FontSize="24" FontWeight="Bold" />
+                <ProgressBar IsIndeterminate="True" Height="8" Margin="0,12,0,12" Width="250"/>
             </StackPanel>
 
             <!-- Нижній підпис -->

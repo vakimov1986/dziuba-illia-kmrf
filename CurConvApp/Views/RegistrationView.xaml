@@ -2,7 +2,8 @@
              xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
              xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
              xmlns:vm="clr-namespace:CurConvApp.ViewModels"
-             xmlns:services="clr-namespace:CurConvApp.Services">
+             xmlns:services="clr-namespace:CurConvApp.Services"
+             xmlns:lex="http://wpflocalizeextension.codeplex.com">
     <UserControl.Resources>
         <Style x:Key="ValidatedTextBox" TargetType="TextBox">
             <Setter Property="Margin" Value="0 0 0 15"/>
@@ -30,23 +31,23 @@
     </UserControl.Resources>
 
     <StackPanel Margin="20" VerticalAlignment="Center" HorizontalAlignment="Center" Width="300">
-        <TextBlock Text="Реєстрація користувача" FontSize="20" FontWeight="Bold" TextAlignment="Center" />
+        <TextBlock Text="{lex:Loc CurConvApp:Resources:RegistrationViewName}" FontSize="20" FontWeight="Bold" TextAlignment="Center" />
 
-        <TextBlock Text="Ім’я"/>
-        <TextBox Text="{Binding Name, UpdateSourceTrigger=PropertyChanged, ValidatesOnDataErrors=True}"  Style="{StaticResource ValidatedTextBox}" services:PlaceholderService.Placeholder="Введіть ім’я"/>
+        <TextBlock Text="{lex:Loc CurConvApp:Resources:User_first_n}"/>
+        <TextBox Text="{Binding Name, UpdateSourceTrigger=PropertyChanged, ValidatesOnDataErrors=True}"  Style="{StaticResource ValidatedTextBox}" services:PlaceholderService.Placeholder="{lex:Loc CurConvApp:Resources:Ent_Fname}"/>
 
-        <TextBlock Text="Прізвище"/>
-        <TextBox Text="{Binding Surname, UpdateSourceTrigger=PropertyChanged}" Style="{StaticResource ValidatedTextBox}" services:PlaceholderService.Placeholder="Введіть прізвище"/>
+        <TextBlock Text="{lex:Loc CurConvApp:Resources:User_last_n}"/>
+        <TextBox Text="{Binding Surname, UpdateSourceTrigger=PropertyChanged}" Style="{StaticResource ValidatedTextBox}" services:PlaceholderService.Placeholder="{lex:Loc CurConvApp:Resources:Ent_Lname}"/>
 
-        <TextBlock Text="Email"/>
-        <TextBox Text="{Binding Email, UpdateSourceTrigger=PropertyChanged}" Style="{StaticResource ValidatedTextBox}" services:PlaceholderService.Placeholder="Введіть Email"/>
+        <TextBlock Text="{lex:Loc CurConvApp:Resources:Email_}"/>
+        <TextBox Text="{Binding Email, UpdateSourceTrigger=PropertyChanged}" Style="{StaticResource ValidatedTextBox}" services:PlaceholderService.Placeholder="{lex:Loc CurConvApp:Resources:Ent_Email}"/>
 
-        <TextBlock Text="Пароль" />
+        <TextBlock Text="{lex:Loc CurConvApp:Resources:Password_}" />
         <PasswordBox x:Name="PasswordBox" Margin="0,0,0,20" PasswordChanged="PasswordBox_PasswordChanged" />
 
         <TextBlock Text="{Binding Message}" Foreground="Red" Margin="0,0,0,10"/>
 
-        <Button Content="Зареєструватися" Command="{Binding RegisterCommand}" Width="150" Margin="0,0,0,20"/>
-        <Button Content="Назад до входу" Command="{Binding GoToLoginCommand}" Width="150"/>
+        <Button Content="{lex:Loc CurConvApp:Resources:Create_button}" Command="{Binding RegisterCommand}" Width="150" Margin="0,0,0,20"/>
+        <Button Content="{lex:Loc CurConvApp:Resources:Back_button}" Command="{Binding GoToLoginCommand}" Width="150"/>
     </StackPanel>
 </UserControl>

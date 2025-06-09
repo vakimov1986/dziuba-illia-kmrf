@@ -1,12 +1,13 @@
-﻿using CommunityToolkit.Mvvm.ComponentModel;
+﻿using System.ComponentModel.DataAnnotations;
+using CommunityToolkit.Mvvm.ComponentModel;
 using CommunityToolkit.Mvvm.Input;
 using CurConvApp.Models;
+using CurConvApp.Services;
 using CurConvApp.Services.Authentification;
 using CurConvApp.Validators;
 using FluentValidation;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.Extensions.Configuration;
-using System.ComponentModel.DataAnnotations;
 
 namespace CurConvApp.ViewModels
 {
@@ -87,6 +88,13 @@ namespace CurConvApp.ViewModels
 
             if (success)
             {
+                // Знайти доданого користувача у базі (щоб був з Id)
+                var registeredUser = db.Users.FirstOrDefault(u => u.Email == Email);
+
+                // Додати у сесію
+                if (registeredUser != null)
+                    UserSessionManager.Instance.CurrentUser = registeredUser;
+
                 Message = "Реєстрація успішна!";
                 _navigate("Converter"); // ПЕРЕХІД до конвертера
             }

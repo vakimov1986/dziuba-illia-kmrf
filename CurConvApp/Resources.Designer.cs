@@ -61,7 +61,16 @@ namespace CurConvApp {
         }
         
         /// <summary>
-        ///   Looks up a localized string similar to Automated Currency Accounting and Conversion.
+        ///   Looks up a localized string similar to Amount.
+        /// </summary>
+        internal static string am_ {
+            get {
+                return ResourceManager.GetString("am_", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Automated Currency Accounting &amp; Conversion.
         /// </summary>
         internal static string AppTitle {
             get {
@@ -70,11 +79,101 @@ namespace CurConvApp {
         }
         
         /// <summary>
-        ///   Looks up a localized string similar to SSU KFKMRFTT NTU.
+        ///   Looks up a localized string similar to Back to login.
+        /// </summary>
+        internal static string Back_button {
+            get {
+                return ResourceManager.GetString("Back_button", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Cancel.
+        /// </summary>
+        internal static string cancel_butt {
+            get {
+                return ResourceManager.GetString("cancel_butt", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Change theme.
+        /// </summary>
+        internal static string ch_th_ {
+            get {
+                return ResourceManager.GetString("ch_th_", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to SSU &quot;KPCMRFTT NTU&quot;.
         /// </summary>
         internal static string CollegeName {
             get {
                 return ResourceManager.GetString("CollegeName", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Convert.
+        /// </summary>
+        internal static string conv_ {
+            get {
+                return ResourceManager.GetString("conv_", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Create an account.
+        /// </summary>
+        internal static string Create_an_account {
+            get {
+                return ResourceManager.GetString("Create_an_account", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Create an account.
+        /// </summary>
+        internal static string Create_button {
+            get {
+                return ResourceManager.GetString("Create_button", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Currency:.
+        /// </summary>
+        internal static string curr_ {
+            get {
+                return ResourceManager.GetString("curr_", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Currency.
+        /// </summary>
+        internal static string curr_2 {
+            get {
+                return ResourceManager.GetString("curr_2", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Download NBU exchange rates (manually).
+        /// </summary>
+        internal static string d_NBU_e_r_m {
+            get {
+                return ResourceManager.GetString("d_NBU_e_r_m", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Date.
+        /// </summary>
+        internal static string date_ {
+            get {
+                return ResourceManager.GetString("date_", resourceCulture);
             }
         }
         
@@ -88,11 +187,164 @@ namespace CurConvApp {
         }
         
         /// <summary>
+        ///   Looks up a localized string similar to Ex.rate (UAH).
+        /// </summary>
+        internal static string e_r {
+            get {
+                return ResourceManager.GetString("e_r", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Looks up a localized string similar to Email.
         /// </summary>
-        internal static string Email {
+        internal static string Email_ {
             get {
-                return ResourceManager.GetString("Email", resourceCulture);
+                return ResourceManager.GetString("Email_", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Enter email.
+        /// </summary>
+        internal static string Ent_Email {
+            get {
+                return ResourceManager.GetString("Ent_Email", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Enter first name.
+        /// </summary>
+        internal static string Ent_Fname {
+            get {
+                return ResourceManager.GetString("Ent_Fname", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Enter last name.
+        /// </summary>
+        internal static string Ent_Lname {
+            get {
+                return ResourceManager.GetString("Ent_Lname", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Export to PDF.
+        /// </summary>
+        internal static string exp_pdf_butt {
+            get {
+                return ResourceManager.GetString("exp_pdf_butt", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to from:.
+        /// </summary>
+        internal static string f_ {
+            get {
+                return ResourceManager.GetString("f_", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Info.
+        /// </summary>
+        internal static string inf_ {
+            get {
+                return ResourceManager.GetString("inf_", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Українська.
+        /// </summary>
+        internal static string lang_ {
+            get {
+                return ResourceManager.GetString("lang_", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Login to the system.
+        /// </summary>
+        internal static string LoginWindowName {
+            get {
+                return ResourceManager.GetString("LoginWindowName", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to New password.
+        /// </summary>
+        internal static string new_pass {
+            get {
+                return ResourceManager.GetString("new_pass", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Old password.
+        /// </summary>
+        internal static string old_pass {
+            get {
+                return ResourceManager.GetString("old_pass", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Password.
+        /// </summary>
+        internal static string Password_ {
+            get {
+                return ResourceManager.GetString("Password_", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Create a new account.
+        /// </summary>
+        internal static string RegistrationViewName {
+            get {
+                return ResourceManager.GetString("RegistrationViewName", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Repeat password.
+        /// </summary>
+        internal static string repeat_pass {
+            get {
+                return ResourceManager.GetString("repeat_pass", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Show course schedule.
+        /// </summary>
+        internal static string s_c_s {
+            get {
+                return ResourceManager.GetString("s_c_s", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Save.
+        /// </summary>
+        internal static string save_butt {
+            get {
+                return ResourceManager.GetString("save_butt", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Sign in.
+        /// </summary>
+        internal static string Sign_in_button {
+            get {
+                return ResourceManager.GetString("Sign_in_button", resourceCulture);
             }
         }
         
@@ -112,6 +364,51 @@ namespace CurConvApp {
         internal static string Supervisor {
             get {
                 return ResourceManager.GetString("Supervisor", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to to:.
+        /// </summary>
+        internal static string t_ {
+            get {
+                return ResourceManager.GetString("t_", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Total:.
+        /// </summary>
+        internal static string tot_ {
+            get {
+                return ResourceManager.GetString("tot_", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to First name.
+        /// </summary>
+        internal static string User_first_n {
+            get {
+                return ResourceManager.GetString("User_first_n", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Last name.
+        /// </summary>
+        internal static string User_last_n {
+            get {
+                return ResourceManager.GetString("User_last_n", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to User profile.
+        /// </summary>
+        internal static string UserProfileWindowName {
+            get {
+                return ResourceManager.GetString("UserProfileWindowName", resourceCulture);
             }
         }
     }

@@ -123,16 +123,115 @@
   <data name="CollegeName" xml:space="preserve">
     <value>ВСП "КФКМРФТТ НТУ"</value>
   </data>
+  <data name="Create_an_account" xml:space="preserve">
+    <value>Реєстрація</value>
+  </data>
   <data name="Developers" xml:space="preserve">
     <value>Розробники:</value>
   </data>
-  <data name="Email" xml:space="preserve">
+  <data name="Email_" xml:space="preserve">
     <value>Eлектронна пошта</value>
+  </data>
+  <data name="LoginWindowName" xml:space="preserve">
+    <value>Вхід до системи</value>
+  </data>
+  <data name="Password_" xml:space="preserve">
+    <value>Пароль</value>
+  </data>
+  <data name="Sign_in_button" xml:space="preserve">
+    <value>Увійти</value>
   </data>
   <data name="Student" xml:space="preserve">
     <value>студент групи ПР-411 Ілля Дзюба</value>
   </data>
   <data name="Supervisor" xml:space="preserve">
     <value>керівник проєкту Владислав Акімов</value>
+  </data>
+  <data name="RegistrationViewName" xml:space="preserve">
+    <value>Реєстрація користувача</value>
+  </data>
+  <data name="User_first_n" xml:space="preserve">
+    <value>Ім’я</value>
+  </data>
+  <data name="User_last_n" xml:space="preserve">
+    <value>Прізвище</value>
+  </data>
+  <data name="Create_button" xml:space="preserve">
+    <value>Зареєструватися</value>
+  </data>
+  <data name="Back_button" xml:space="preserve">
+    <value>Назад до входу</value>
+  </data>
+  <data name="Ent_Fname" xml:space="preserve">
+    <value>Введіть ім’я</value>
+  </data>
+  <data name="Ent_Lname" xml:space="preserve">
+    <value>Введіть прізвище</value>
+  </data>
+  <data name="Ent_Email" xml:space="preserve">
+    <value>Введіть email</value>
+  </data>
+  <data name="old_pass" xml:space="preserve">
+    <value>Старий пароль</value>
+  </data>
+  <data name="new_pass" xml:space="preserve">
+    <value>Новий пароль</value>
+  </data>
+  <data name="repeat_pass" xml:space="preserve">
+    <value>Повторіть новий пароль</value>
+  </data>
+  <data name="save_butt" xml:space="preserve">
+    <value>Зберегти</value>
+  </data>
+  <data name="cancel_butt" xml:space="preserve">
+    <value>Відміна</value>
+  </data>
+  <data name="UserProfileWindowName" xml:space="preserve">
+    <value>Профіль користувача</value>
+  </data>
+  <data name="curr_" xml:space="preserve">
+    <value>Валюта:</value>
+  </data>
+  <data name="f_" xml:space="preserve">
+    <value>з:</value>
+  </data>
+  <data name="t_" xml:space="preserve">
+    <value>до:</value>
+  </data>
+  <data name="exp_pdf_butt" xml:space="preserve">
+    <value>Експортувати до PDF</value>
+  </data>
+  <data name="lang_" xml:space="preserve">
+    <value>English</value>
+  </data>
+  <data name="inf_" xml:space="preserve">
+    <value>Інформація</value>
+  </data>
+  <data name="d_NBU_e_r_m" xml:space="preserve">
+    <value>Завантажити курси валют НБУ (ручне)</value>
+  </data>
+  <data name="ch_th_" xml:space="preserve">
+    <value>Змінити тему</value>
+  </data>
+  <data name="tot_" xml:space="preserve">
+    <value>Сума:</value>
+  </data>
+  <data name="am_" xml:space="preserve">
+    <value>Кількість</value>
+  </data>
+  <data name="e_r" xml:space="preserve">
+    <value>Курс (грн.)</value>
+  </data>
+  <data name="date_" xml:space="preserve">
+    <value>Дата</value>
+  </data>
+  <data name="conv_" xml:space="preserve">
+    <value>Конвертувати</value>
+  </data>
+  <data name="s_c_s" xml:space="preserve">
+    <value>Показати графік курсу</value>
+  </data>
+  <data name="curr_2" xml:space="preserve">
+    <value>Валюта</value>
   </data>
 </root>

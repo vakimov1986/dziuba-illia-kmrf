@@ -67,6 +67,8 @@ namespace CurConvApp.ViewModels
             if (user != null)
             {
                 Message = "Вхід успішний.";
+                // Зберігаємо користувача в UserSessionManager
+                UserSessionManager.Instance.CurrentUser = user;
                 _navigate("Converter"); // ПЕРЕХІД до конвертера
             }
             else
@@ -85,5 +87,6 @@ namespace CurConvApp.ViewModels
             //Message = "Вхід успішний.";
             //_navigate("Converter"); // ПЕРЕХІД до конвертера
         }
+
     }
 }

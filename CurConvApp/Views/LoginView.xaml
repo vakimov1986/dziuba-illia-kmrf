@@ -4,17 +4,22 @@
              xmlns:vm="clr-namespace:CurConvApp.ViewModels"
              xmlns:lex="http://wpflocalizeextension.codeplex.com">
     <StackPanel Margin="20" VerticalAlignment="Center" HorizontalAlignment="Center" Width="300">
-        <TextBlock Text="Вхід до системи" FontSize="20" FontWeight="Bold" Margin="0,0,0,20" TextAlignment="Center"/>
+        <!-- Кнопка перемикання мови -->
+        <Button Content="{lex:Loc CurConvApp:Resources:lang_}" 
+            Width="150" Margin="0,0,0,10"
+            Click="ChangeLanguage_Click"/>
+        
+        <TextBlock Text="{lex:Loc CurConvApp:Resources:LoginWindowName}" FontSize="20" FontWeight="Bold" Margin="0,0,0,20" TextAlignment="Center"/>
 
-        <TextBlock Text="{lex:Loc CurConvApp:Resources:Email}"/>
+        <TextBlock Text="{lex:Loc CurConvApp:Resources:Email_}"/>
         <TextBox Text="{Binding Email, UpdateSourceTrigger=PropertyChanged}" Margin="0,0,0,10"/>
 
-        <TextBlock Text="Пароль"/>
+        <TextBlock Text="{lex:Loc CurConvApp:Resources:Password_}"/>
         <PasswordBox x:Name="PasswordBox" Margin="0,0,0,10" PasswordChanged="PasswordBox_PasswordChanged"/>
 
         <TextBlock Text="{Binding Message}" Foreground="Red" Margin="0,0,0,10"/>
 
-        <Button Content="Увійти" Command="{Binding LoginCommand}" Width="150" Margin="0,0,0,10"/>
-        <Button Content="Реєстрація" Command="{Binding GoToRegisterCommand}" Width="150"/>
+        <Button Content="{lex:Loc CurConvApp:Resources:Sign_in_button}" Command="{Binding LoginCommand}" Width="150" Margin="0,0,0,10"/>
+        <Button Content="{lex:Loc CurConvApp:Resources:Create_an_account}" Command="{Binding GoToRegisterCommand}" Width="150"/>
     </StackPanel>
 </UserControl>

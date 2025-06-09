@@ -32,14 +32,14 @@ namespace CurConvApp.ViewModels
         }
 
         [ObservableProperty]
-        private DateTime startDate = DateTime.Now.AddMonths(-1);
+        private DateTime startDate = new DateTime(2025, 5, 14);
         partial void OnStartDateChanged(DateTime value)
         {
             _ = LoadChartAsync();
         }
 
         [ObservableProperty]
-        private DateTime endDate = DateTime.Now;
+        private DateTime endDate = DateTime.Now.AddDays(1);
         partial void OnEndDateChanged(DateTime value)
         {
             _ = LoadChartAsync();

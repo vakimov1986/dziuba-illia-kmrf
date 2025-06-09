@@ -18,11 +18,15 @@
     <None Remove="Assets\Flags\czk.png" />
     <None Remove="Assets\Flags\eur.png" />
     <None Remove="Assets\Flags\gbp.png" />
+    <None Remove="Assets\Flags\globe.png" />
     <None Remove="Assets\Flags\huf.png" />
+    <None Remove="Assets\Flags\info.png" />
     <None Remove="Assets\Flags\jpy.png" />
     <None Remove="Assets\Flags\pln.png" />
+    <None Remove="Assets\Flags\profile.png" />
     <None Remove="Assets\Flags\ron.png" />
     <None Remove="Assets\Flags\sek.png" />
+    <None Remove="Assets\Flags\theme.png" />
     <None Remove="Assets\Flags\usd.png" />
     <None Remove="Views\splash.jpg" />
   </ItemGroup>
@@ -34,12 +38,23 @@
   </ItemGroup>
 
   <ItemGroup>
+    <Resource Include="Assets\Flags\globe.png" />
+    <Resource Include="Assets\Flags\info.png">
+      <CopyToOutputDirectory>Never</CopyToOutputDirectory>
+    </Resource>
+    <Resource Include="Assets\Flags\profile.png">
+      <CopyToOutputDirectory>Never</CopyToOutputDirectory>
+    </Resource>
+    <Resource Include="Assets\Flags\theme.png">
+      <CopyToOutputDirectory>Never</CopyToOutputDirectory>
+    </Resource>
     <Resource Include="Assets\Flags\usd.png">
       <CopyToOutputDirectory>Never</CopyToOutputDirectory>
     </Resource>
   </ItemGroup>
 
   <ItemGroup>
+    <PackageReference Include="BCrypt.Net-Next" Version="4.0.3" />
     <PackageReference Include="CommunityToolkit.Mvvm" Version="8.4.0" />
     <PackageReference Include="FluentValidation" Version="12.0.0" />
     <PackageReference Include="LiveChartsCore.SkiaSharpView.WPF" Version="2.0.0-rc5.4" />

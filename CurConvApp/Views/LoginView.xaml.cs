@@ -22,5 +22,15 @@ namespace CurConvApp.Views
                 vm.Password = ((PasswordBox)sender).Password;
             }
         }
+
+        private void ChangeLanguage_Click(object sender, RoutedEventArgs e)
+        {
+            var currCulture = WPFLocalizeExtension.Engine.LocalizeDictionary.Instance.Culture;
+            if (currCulture.Name == "uk-UA")
+                WPFLocalizeExtension.Engine.LocalizeDictionary.Instance.Culture = new System.Globalization.CultureInfo("en");
+            else
+                WPFLocalizeExtension.Engine.LocalizeDictionary.Instance.Culture = new System.Globalization.CultureInfo("uk-UA");
+        }
+
     }
 }
