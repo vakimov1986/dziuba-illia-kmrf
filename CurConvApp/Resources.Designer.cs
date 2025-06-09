@@ -61,7 +61,7 @@ namespace CurConvApp {
         }
         
         /// <summary>
-        ///   Looks up a localized string similar to Автоматизований облік та конвертація валют.
+        ///   Looks up a localized string similar to Automated Currency Accounting and Conversion.
         /// </summary>
         internal static string AppTitle {
             get {
@@ -70,7 +70,7 @@ namespace CurConvApp {
         }
         
         /// <summary>
-        ///   Looks up a localized string similar to ВСП &quot;КФКМРФТТ НТУ&quot;.
+        ///   Looks up a localized string similar to SSU KFKMRFTT NTU.
         /// </summary>
         internal static string CollegeName {
             get {
@@ -79,7 +79,7 @@ namespace CurConvApp {
         }
         
         /// <summary>
-        ///   Looks up a localized string similar to Розробники:.
+        ///   Looks up a localized string similar to Developers:.
         /// </summary>
         internal static string Developers {
             get {
@@ -88,7 +88,16 @@ namespace CurConvApp {
         }
         
         /// <summary>
-        ///   Looks up a localized string similar to студент групи ПР-411 Ілля Дзюба.
+        ///   Looks up a localized string similar to Email.
+        /// </summary>
+        internal static string Email {
+            get {
+                return ResourceManager.GetString("Email", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to student of group PR-411 Illia Dziuba.
         /// </summary>
         internal static string Student {
             get {
@@ -97,7 +106,8 @@ namespace CurConvApp {
         }
         
         /// <summary>
-        ///   Looks up a localized string similar to керівник проєкту Владислав Акімов.
+        ///   Looks up a localized string similar to project supervisor Vladyslav Akimov
+        ///.
         /// </summary>
         internal static string Supervisor {
             get {

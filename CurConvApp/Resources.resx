@@ -118,18 +118,22 @@
     <value>System.Resources.ResXResourceWriter, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
   </resheader>
   <data name="AppTitle" xml:space="preserve">
-    <value>Автоматизований облік та конвертація валют</value>
+    <value>Automated Currency Accounting and Conversion</value>
   </data>
   <data name="CollegeName" xml:space="preserve">
-    <value>ВСП "КФКМРФТТ НТУ"</value>
+    <value>SSU KFKMRFTT NTU</value>
   </data>
   <data name="Developers" xml:space="preserve">
-    <value>Розробники:</value>
+    <value>Developers:</value>
+  </data>
+  <data name="Email" xml:space="preserve">
+    <value>Email</value>
   </data>
   <data name="Student" xml:space="preserve">
-    <value>студент групи ПР-411 Ілля Дзюба</value>
+    <value>student of group PR-411 Illia Dziuba</value>
   </data>
   <data name="Supervisor" xml:space="preserve">
-    <value>керівник проєкту Владислав Акімов</value>
+    <value>project supervisor Vladyslav Akimov
+</value>
   </data>
 </root>
