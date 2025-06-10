@@ -101,7 +101,39 @@ namespace CurConvApp.ViewModels
             decimal result = amountInUah / (ToCurrency.Amount / ToCurrency.Units);
 
             ConversionResult = $"{amount} {FromCurrency.CurrencyCodeL} = {result:F2} {ToCurrency.CurrencyCodeL}";
+
+            // --- Додаємо збереження в історію конвертацій ---
+            try
+            {
+                var user = UserSessionManager.Instance.CurrentUser;
+                if (user != null)
+                {
+                    using (var db = new AppDbContext(
+                        new Microsoft.EntityFrameworkCore.DbContextOptionsBuilder<AppDbContext>()
+                        .UseSqlServer(App.AppConfiguration.GetConnectionString("DefaultConnection")).Options))
+                    {
+                        var history = new ConversionHistory
+                        {
+                            UserId = user.Id,
+                            FromCurrency = FromCurrency.CurrencyCodeL,
+                            ToCurrency = ToCurrency.CurrencyCodeL,
+                            AmountFrom = amount,
+                            AmountTo = result,
+                            ConversionDateTime = DateTime.Now // дата і час конвертації
+                        };
+                        db.ConversionHistories.Add(history);
+                        db.SaveChanges();
+                    }
+                }
+                // якщо користувач не авторизований — не зберігаємо історію
+            }
+            catch (Exception ex)
+            {
+                // Можна повідомити про помилку, або записати лог
+                // MessageBox.Show($"Не вдалося зберегти історію: {ex.Message}");
+            }
         }
+
 
 
         [RelayCommand]

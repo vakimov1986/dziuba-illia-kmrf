@@ -274,4 +274,8 @@
     <value>Currency</value>
     <comment>CurrencyConverterView</comment>
   </data>
+  <data name="ShowHistory" xml:space="preserve">
+    <value>History</value>
+    <comment>UserProfileWindow</comment>
+  </data>
 </root>

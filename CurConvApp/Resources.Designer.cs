@@ -340,6 +340,15 @@ namespace CurConvApp {
         }
         
         /// <summary>
+        ///   Looks up a localized string similar to History.
+        /// </summary>
+        internal static string ShowHistory {
+            get {
+                return ResourceManager.GetString("ShowHistory", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Looks up a localized string similar to Sign in.
         /// </summary>
         internal static string Sign_in_button {

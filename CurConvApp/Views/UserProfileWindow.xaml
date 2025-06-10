@@ -2,8 +2,8 @@
         xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
         xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
         xmlns:lex="http://wpflocalizeextension.codeplex.com"
-        Title="{lex:Loc CurConvApp:Resources:UserProfileWindowName}" Height="430" Width="300
-        " WindowStartupLocation="CenterOwner">
+        Title="{lex:Loc CurConvApp:Resources:UserProfileWindowName}" Height="430" Width="370"
+        WindowStartupLocation="CenterScreen">
     <Grid Margin="20">
         <Grid.RowDefinitions>
             <RowDefinition Height="Auto"/>
@@ -13,7 +13,26 @@
             <RowDefinition Height="Auto"/>
         </Grid.RowDefinitions>
 
-        <TextBlock Text="{lex:Loc CurConvApp:Resources:UserProfileWindowName}" FontSize="20" FontWeight="Bold" Margin="0,0,0,16"/>
+        <!-- Верхній рядок: заголовок ліворуч, кнопка справа -->
+        <Grid Margin="0,0,0,16">
+            <Grid.ColumnDefinitions>
+                <ColumnDefinition Width="*"/>
+                <ColumnDefinition Width="Auto"/>
+            </Grid.ColumnDefinitions>
+
+            <!-- Текст ліворуч -->
+            <TextBlock Text="{lex:Loc CurConvApp:Resources:UserProfileWindowName}"
+               FontSize="20" FontWeight="Bold"
+               VerticalAlignment="Center" Grid.Column="0"/>
+
+            <!-- Кнопка праворуч -->
+            <Button Width="36" Height="36" Grid.Column="1"
+            ToolTip="{lex:Loc CurConvApp:Resources:ShowHistory}"
+            Click="ShowHistory_Click"
+            Background="Transparent" BorderBrush="{x:Null}">
+                <Image Source="/Assets/Flags/history.png" Width="32" Height="32"/>
+            </Button>
+        </Grid>
 
         <!-- Поля профілю на Grid (замість StackPanel) -->
         <Grid Grid.Row="1">

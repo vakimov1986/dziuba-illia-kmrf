@@ -85,6 +85,13 @@ namespace CurConvApp.Views
             this.Close();
         }
 
-        
+        private void ShowHistory_Click(object sender, RoutedEventArgs e)
+        {
+            var historyWindow = new HistoryWindow(_user.Id);
+            historyWindow.Owner = this;
+            historyWindow.ShowDialog();
+        }
+
+
     }
 }

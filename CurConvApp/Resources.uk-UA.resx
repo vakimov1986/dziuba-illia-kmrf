@@ -234,4 +234,7 @@
   <data name="curr_2" xml:space="preserve">
     <value>Валюта</value>
   </data>
+  <data name="ShowHistory" xml:space="preserve">
+    <value>Історія</value>
+  </data>
 </root>

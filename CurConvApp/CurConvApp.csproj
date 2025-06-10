@@ -19,6 +19,7 @@
     <None Remove="Assets\Flags\eur.png" />
     <None Remove="Assets\Flags\gbp.png" />
     <None Remove="Assets\Flags\globe.png" />
+    <None Remove="Assets\Flags\history.png" />
     <None Remove="Assets\Flags\huf.png" />
     <None Remove="Assets\Flags\info.png" />
     <None Remove="Assets\Flags\jpy.png" />
@@ -39,6 +40,7 @@
 
   <ItemGroup>
     <Resource Include="Assets\Flags\globe.png" />
+    <Resource Include="Assets\Flags\history.png" />
     <Resource Include="Assets\Flags\info.png">
       <CopyToOutputDirectory>Never</CopyToOutputDirectory>
     </Resource>
