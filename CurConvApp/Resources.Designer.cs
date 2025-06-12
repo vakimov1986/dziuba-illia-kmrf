@@ -304,7 +304,7 @@ namespace CurConvApp {
         }
         
         /// <summary>
-        ///   Looks up a localized string similar to Create a new account.
+        ///   Looks up a localized string similar to Create an account.
         /// </summary>
         internal static string RegistrationViewName {
             get {

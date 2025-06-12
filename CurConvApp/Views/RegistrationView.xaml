@@ -3,51 +3,45 @@
              xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
              xmlns:vm="clr-namespace:CurConvApp.ViewModels"
              xmlns:services="clr-namespace:CurConvApp.Services"
+             xmlns:materialDesign="http://materialdesigninxaml.net/winfx/xaml/themes"
              xmlns:lex="http://wpflocalizeextension.codeplex.com">
-    <UserControl.Resources>
-        <Style x:Key="ValidatedTextBox" TargetType="TextBox">
-            <Setter Property="Margin" Value="0 0 0 15"/>
-            <Setter Property="Validation.ErrorTemplate">
-                <Setter.Value>
-                    <ControlTemplate>
-                        <StackPanel>
-                            <AdornedElementPlaceholder />
-                            <TextBlock Foreground="Red"
-                               FontSize="12"
-                               Margin="4,2,0,0"
-                               Text="{Binding Path=AdornedElement.(Validation.Errors)[0].ErrorContent,
-                                              RelativeSource={RelativeSource AncestorType=Adorner}}" />
-                        </StackPanel>
-                    </ControlTemplate>
-                </Setter.Value>
-            </Setter>
-            <Style.Triggers>
-                <Trigger Property="Validation.HasError" Value="True">
-                    <Setter Property="BorderBrush" Value="Red"/>
-                    <Setter Property="BorderThickness" Value="1"/>
-                </Trigger>
-            </Style.Triggers>
-        </Style>
-    </UserControl.Resources>
+    <Grid Margin="40">
+        <StackPanel>
+            <TextBlock Text="Реєстрація користувача"
+                    FontSize="24"
+                    FontWeight="Bold"
+                    Margin="0 0 0 20"
+                    HorizontalAlignment="Center"/>
 
-    <StackPanel Margin="20" VerticalAlignment="Center" HorizontalAlignment="Center" Width="300">
-        <TextBlock Text="{lex:Loc CurConvApp:Resources:RegistrationViewName}" FontSize="20" FontWeight="Bold" TextAlignment="Center" />
+            <TextBox materialDesign:HintAssist.Hint="Ім’я"
+                  Style="{StaticResource MaterialDesignFloatingHintTextBox}"
+                  Margin="0 0 0 20"
+                  Text="{Binding Name, UpdateSourceTrigger=PropertyChanged}" />
 
-        <TextBlock Text="{lex:Loc CurConvApp:Resources:User_first_n}"/>
-        <TextBox Text="{Binding Name, UpdateSourceTrigger=PropertyChanged, ValidatesOnDataErrors=True}"  Style="{StaticResource ValidatedTextBox}" services:PlaceholderService.Placeholder="{lex:Loc CurConvApp:Resources:Ent_Fname}"/>
+            <TextBox materialDesign:HintAssist.Hint="Прізвище"
+                  Style="{StaticResource MaterialDesignFloatingHintTextBox}"
+                  Margin="0 0 0 20"
+                  Text="{Binding Surname, UpdateSourceTrigger=PropertyChanged}" />
 
-        <TextBlock Text="{lex:Loc CurConvApp:Resources:User_last_n}"/>
-        <TextBox Text="{Binding Surname, UpdateSourceTrigger=PropertyChanged}" Style="{StaticResource ValidatedTextBox}" services:PlaceholderService.Placeholder="{lex:Loc CurConvApp:Resources:Ent_Lname}"/>
+            <TextBox materialDesign:HintAssist.Hint="Електронна пошта"
+                  Style="{StaticResource MaterialDesignFloatingHintTextBox}"
+                  Margin="0 0 0 20"
+                  Text="{Binding Email, UpdateSourceTrigger=PropertyChanged}" />
 
-        <TextBlock Text="{lex:Loc CurConvApp:Resources:Email_}"/>
-        <TextBox Text="{Binding Email, UpdateSourceTrigger=PropertyChanged}" Style="{StaticResource ValidatedTextBox}" services:PlaceholderService.Placeholder="{lex:Loc CurConvApp:Resources:Ent_Email}"/>
+            <PasswordBox materialDesign:HintAssist.Hint="Пароль"
+                      Style="{StaticResource MaterialDesignFloatingHintPasswordBox}"
+                      Margin="0 0 0 20"
+                       />
 
-        <TextBlock Text="{lex:Loc CurConvApp:Resources:Password_}" />
-        <PasswordBox x:Name="PasswordBox" Margin="0,0,0,20" PasswordChanged="PasswordBox_PasswordChanged" />
+            <Button Content="Зареєструватися"
+                 Style="{StaticResource MaterialDesignRaisedButton}"
+                 Command="{Binding RegisterCommand}"
+                 Margin="0 0 0 10"/>
 
-        <TextBlock Text="{Binding Message}" Foreground="Red" Margin="0,0,0,10"/>
-
-        <Button Content="{lex:Loc CurConvApp:Resources:Create_button}" Command="{Binding RegisterCommand}" Width="150" Margin="0,0,0,20"/>
-        <Button Content="{lex:Loc CurConvApp:Resources:Back_button}" Command="{Binding GoToLoginCommand}" Width="150"/>
-    </StackPanel>
+            <Button Content="Назад до входу"
+                 Style="{StaticResource MaterialDesignOutlinedButton}"
+                 Command="{Binding GoToLoginCommand}" />
+        </StackPanel>
+    </Grid>
 </UserControl>
+
