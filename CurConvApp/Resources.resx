@@ -159,7 +159,7 @@
     <comment>MainWindow</comment>
   </data>
   <data name="RegistrationViewName" xml:space="preserve">
-    <value>Create a new account</value>
+    <value>Create an account</value>
     <comment>RegistrationView</comment>
   </data>
   <data name="User_first_n" xml:space="preserve">
