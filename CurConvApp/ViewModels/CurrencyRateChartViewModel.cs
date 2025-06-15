@@ -9,9 +9,13 @@ using CurConvApp.Reports;
 using CurConvApp.Services;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.Extensions.Configuration;
+using System.IO;
 using OxyPlot;
 using OxyPlot.Axes;
 using OxyPlot.Series;
+using OxyPlot.Wpf;
+//using OxyPlot.ImageSharp;
+using OxyPlot.SkiaSharp;
 using QuestPDF.Fluent;
 using QuestPDF.Infrastructure;
 
@@ -19,10 +23,16 @@ namespace CurConvApp.ViewModels
 {
     public partial class CurrencyRateChartViewModel : ObservableObject
     {
+
+        private readonly IFileDialogService _fileDialogService;
+
+
         public ObservableCollection<string> AllowedCurrencies { get; } = new()
         {
             "USD", "EUR", "GBP", "CHF", "CZK", "PLN", "HUF", "SEK", "RON", "JPY"
         };
+
+        public ObservableCollection<CurrencyRateRecord> CurrencyRatesHistory { get; set; }
 
         [ObservableProperty]
         private string currencyCode = "USD";
@@ -46,10 +56,16 @@ namespace CurConvApp.ViewModels
         }
 
         [ObservableProperty]
-        private PlotModel chartModel;
+        private PlotModel chartModel = new PlotModel();
 
-        public CurrencyRateChartViewModel()
+
+
+
+        public CurrencyRateChartViewModel(IFileDialogService fileDialogService)
         {
+            _fileDialogService = fileDialogService;
+
+            CurrencyRatesHistory = new ObservableCollection<CurrencyRateRecord>();
             QuestPDF.Settings.License = LicenseType.Community;
             _ = LoadChartAsync();
         }
@@ -69,6 +85,12 @@ namespace CurConvApp.ViewModels
                 .ToListAsync();
 
             ChartModel = BuildChartModel(rates, CurrencyCode);
+
+            // ОНОВЛЕННЯ ТАБЛИЦІ
+            CurrencyRatesHistory.Clear();
+            foreach (var rate in rates)
+                CurrencyRatesHistory.Add(rate);
+
         }
 
         private PlotModel BuildChartModel(System.Collections.Generic.List<CurrencyRateRecord> rates, string currencyCode)
@@ -98,7 +120,7 @@ namespace CurConvApp.ViewModels
             model.Axes.Add(new LinearAxis
             {
                 Position = AxisPosition.Left,
-                Title = "Курс"
+                Title = "Курс грн."
             });
 
             model.Series.Add(lineSeries);
@@ -106,38 +128,121 @@ namespace CurConvApp.ViewModels
             return model;
         }
 
-        [RelayCommand]
+        public event Action? ExportPdfRequested;
+
+        //[RelayCommand]
+        //private void ExportPdf()
+        //{
+        //    ExportPdfRequested?.Invoke();
+        //}
+
+        //public RelayCommand ExportPdfCommand => new RelayCommand(ExportPdf);
+
+        //private void ExportPdf()
+        //{
+        //    var filePath = _fileDialogService.ShowSaveFileDialog(
+        //        "PDF files (*.pdf)|*.pdf",
+        //        $"Звіт_{CurrencyCode}_{DateTime.Now:yyyyMMdd}.pdf"
+        //    );
+        //    if (string.IsNullOrEmpty(filePath))
+        //        return;
+
+        //    // Далі – отримання курсів з БД
+        //    var connectionString = App.AppConfiguration.GetConnectionString("DefaultConnection");
+        //    var options = new DbContextOptionsBuilder<AppDbContext>()
+        //        .UseSqlServer(connectionString)
+        //        .Options;
+
+        //    using var db = new AppDbContext(options);
+        //    var rates = db.CurrencyRateRecords
+        //        .Where(r => r.CurrencyCodeL == CurrencyCode && r.StartDate >= StartDate && r.StartDate <= EndDate)
+        //        .OrderBy(r => r.StartDate)
+        //        .ToList();
+
+        //    // Створення PDF через CurrencyRatePdfReport 
+        //    var report = new CurrencyRatePdfReport(CurrencyCode, rates, StartDate, EndDate);
+        //    report.GeneratePdf(filePath);
+
+        //    System.Windows.MessageBox.Show($"Експорт завершено! Файл збережено: {filePath}");
+        //}
+        public IRelayCommand ExportPdfCommand => new RelayCommand(ExportPdf);
         private void ExportPdf()
         {
-            ExportToPdf(CurrencyCode, StartDate, EndDate);
-        }
-        public void ExportToPdf(string currency, DateTime start, DateTime end)
-        {
+            var filePath = _fileDialogService.ShowSaveFileDialog(
+                "PDF files (*.pdf)|*.pdf",
+                $"Звіт_{CurrencyCode}_{DateTime.Now:yyyyMMdd}.pdf"
+            );
+            if (string.IsNullOrEmpty(filePath))
+                return;
+
+            // 1. Зберігаємо графік у PNG (ДОДАЙ цей метод у ViewModel, якщо ще не додано)
+            string chartFile = System.IO.Path.GetTempFileName() + ".png";
+            SavePlotToPng(ChartModel, chartFile);
+
+            // 2. Отримуємо курси з БД
             var connectionString = App.AppConfiguration.GetConnectionString("DefaultConnection");
             var options = new DbContextOptionsBuilder<AppDbContext>()
                 .UseSqlServer(connectionString)
                 .Options;
-
             using var db = new AppDbContext(options);
-
             var rates = db.CurrencyRateRecords
-                .Where(r => r.CurrencyCodeL == currency && r.StartDate >= start && r.StartDate <= end)
+                .Where(r => r.CurrencyCodeL == CurrencyCode && r.StartDate >= StartDate && r.StartDate <= EndDate)
                 .OrderBy(r => r.StartDate)
                 .ToList();
 
-            var report = new CurrencyRatePdfReport(currency, rates, start, end);
+            // 3. Викликаємо статичний метод твого PDF-репорту:
+            CurConvApp.Reports.CurrencyRatePdfReport.ExportToPdfWithImage(filePath, chartFile, rates);
 
-            var dialog = new Microsoft.Win32.SaveFileDialog
+            // 4. Видаляємо тимчасовий файл із графіком
+            System.IO.File.Delete(chartFile);
+
+            System.Windows.MessageBox.Show($"Експорт завершено! Файл збережено: {filePath}");
+        }
+
+
+        private void SavePlotToPng(OxyPlot.PlotModel model, string filePath)
+        {
+            var exporter = new OxyPlot.SkiaSharp.PngExporter { Width = 800, Height = 500 };
+            using (var stream = System.IO.File.Create(filePath))
             {
-                Filter = "PDF files (*.pdf)|*.pdf",
-                FileName = $"Звіт_{currency}_{DateTime.Now:yyyyMMdd}.pdf"
-            };
-            if (dialog.ShowDialog() == true)
-            {
-                report.GeneratePdf(dialog.FileName);
-                System.Windows.MessageBox.Show("Експорт завершено!", "PDF", System.Windows.MessageBoxButton.OK, System.Windows.MessageBoxImage.Information);
+                exporter.Export(model, stream);
             }
         }
+
+
+        //private void ExportPdf()
+        //{
+        //    ExportToPdf(CurrencyCode, StartDate, EndDate);
+        //}
+
+
+        //public void ExportToPdf(string currency, DateTime start, DateTime end)
+        //{
+        //    var connectionString = App.AppConfiguration.GetConnectionString("DefaultConnection");
+        //    var options = new DbContextOptionsBuilder<AppDbContext>()
+        //        .UseSqlServer(connectionString)
+        //        .Options;
+
+        //    using var db = new AppDbContext(options);
+
+        //    var rates = db.CurrencyRateRecords
+        //        .Where(r => r.CurrencyCodeL == currency && r.StartDate >= start && r.StartDate <= end)
+        //        .OrderBy(r => r.StartDate)
+        //        .ToList();
+
+        //    var report = new CurrencyRatePdfReport(currency, rates, start, end);
+
+        //    var dialog = new Microsoft.Win32.SaveFileDialog
+        //    {
+        //        Filter = "PDF files (*.pdf)|*.pdf",
+        //        FileName = $"Звіт_{currency}_{DateTime.Now:yyyyMMdd}.pdf"
+        //    };
+        //    if (dialog.ShowDialog() == true)
+        //    {
+        //        report.GeneratePdf(dialog.FileName);
+        //        System.Windows.MessageBox.Show("Експорт завершено!", "PDF", System.Windows.MessageBoxButton.OK, System.Windows.MessageBoxImage.Information);
+        //    }
+        //}
 
 
     }

@@ -124,6 +124,15 @@ namespace CurConvApp {
         }
         
         /// <summary>
+        ///   Looks up a localized string similar to Currency conversion.
+        /// </summary>
+        internal static string ConvertTite {
+            get {
+                return ResourceManager.GetString("ConvertTite", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Looks up a localized string similar to Create an account.
         /// </summary>
         internal static string Create_an_account {
@@ -232,6 +241,15 @@ namespace CurConvApp {
         }
         
         /// <summary>
+        ///   Looks up a localized string similar to Exit.
+        /// </summary>
+        internal static string Exit {
+            get {
+                return ResourceManager.GetString("Exit", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Looks up a localized string similar to Export to PDF.
         /// </summary>
         internal static string exp_pdf_butt {
@@ -246,6 +264,15 @@ namespace CurConvApp {
         internal static string f_ {
             get {
                 return ResourceManager.GetString("f_", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Forecast.
+        /// </summary>
+        internal static string forecast_ {
+            get {
+                return ResourceManager.GetString("forecast_", resourceCulture);
             }
         }
         

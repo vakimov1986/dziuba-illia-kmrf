@@ -6,7 +6,8 @@
              xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
              xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
              xmlns:lex="http://wpflocalizeextension.codeplex.com"
-             mc:Ignorable="d">
+             mc:Ignorable="d"
+             Background="{DynamicResource MainBackgroundBrush}">
 
     <UserControl.DataContext>
         <vm:CurrencyConverterViewModel />
@@ -16,144 +17,185 @@
         <converters:LowercaseToImagePathConverter x:Key="LowercaseToImagePathConverter"/>
     </UserControl.Resources>
 
-    <Grid Background="{DynamicResource MainBackgroundBrush}">
+    <Grid Margin="20">
+        <Grid.RowDefinitions>
+            <RowDefinition Height="Auto"/>
+            <!-- Top bar -->
+            <RowDefinition Height="Auto"/>
+            <!-- Title -->
+            <RowDefinition Height="Auto"/>
+            <!-- Controls -->
+            <RowDefinition Height="Auto"/>
+            <!-- Result -->
+            <RowDefinition Height="*"/>
+            <!-- Currency table -->
+            <RowDefinition Height="Auto"/>
+            <!-- Status/timer -->
+        </Grid.RowDefinitions>
 
-        <!-- Панель іконок у правому верхньому куті -->
-        <StackPanel Orientation="Vertical"
-            HorizontalAlignment="Right"
-            VerticalAlignment="Top"
-            Margin="0,8,16,0">
-            <Button Width="36" Height="36" Margin="0,2"
-            ToolTip="{lex:Loc CurConvApp:Resources:UserProfileWindowName}"
-            Click="ProfileButton_Click"
-            Background="Transparent" BorderBrush="{x:Null}">
-                <Image Source="/Assets/Flags/profile.png" Width="32" Height="32" Stretch="Uniform"/>
+        <!-- TOP BAR: Кнопка графіка ліворуч, решта кнопок праворуч -->
+        <Grid Grid.Row="0" Margin="0,0,0,10">
+            <Grid.ColumnDefinitions>
+                <ColumnDefinition Width="Auto"/>
+                <ColumnDefinition Width="Auto"/>
+                <ColumnDefinition Width="Auto"/>
+                <ColumnDefinition Width="*"/>
+                <ColumnDefinition Width="Auto"/>
+            </Grid.ColumnDefinitions>
+
+            <!-- Кнопка показу графіка -->
+            <Button Width="34" Height="34" Margin="0,0,8,0"
+            ToolTip="{lex:Loc CurConvApp:Resources:s_c_s}"
+            Command="{Binding ShowChartCommand}" Background="Transparent" BorderBrush="{x:Null}" Grid.Column="0">
+                <Image Source="/Assets/Flags/chart.png" Width="28" Height="28"/>
             </Button>
-            <Button Width="36" Height="36" Margin="0,2"
-            ToolTip="{lex:Loc CurConvApp:Resources:ch_th_}"
-            Click="ThemeButton_Click"
-            Background="Transparent" BorderBrush="{x:Null}">
-                <Image Source="/Assets/Flags/theme.png" Width="32" Height="32" Stretch="Uniform"/>
+
+            <!-- Кнопка ІСТОРІЯ ОПЕРАЦІЙ -->
+            <Button Width="34" Height="34" Margin="0,0,4,0"
+            ToolTip="{lex:Loc CurConvApp:Resources:ShowHistory}"
+            Command="{Binding ShowHistoryCommand}"
+            Background="Transparent" BorderBrush="{x:Null}" Grid.Column="1">
+                <Image Source="/Assets/Flags/history.png" Width="28" Height="28"/>
             </Button>
-            <Button Width="36" Height="36" Margin="0,2"
-            ToolTip="{lex:Loc CurConvApp:Resources:inf_}"
-            Click="InfoButton_Click"
-            Background="Transparent" BorderBrush="{x:Null}">
-                <Image Source="/Assets/Flags/info.png" Width="32" Height="32" Stretch="Uniform"/>
+
+            <Button Width="34" Height="34" Margin="4,0"
+            ToolTip="{lex:Loc CurConvApp:Resources:forecast_}"
+            Command="{Binding ForecastRateCommand}"
+            Background="Transparent" BorderBrush="{x:Null}" Grid.Column="2">
+                <Image Source="/Assets/Flags/forecast.png" Width="28" Height="28"/>
             </Button>
-            <Button Width="36" Height="36" Margin="0,2"
-            ToolTip="{lex:Loc CurConvApp:Resources:lang_}"
-            Click="ChangeLanguage_Click"
-            Background="Transparent" BorderBrush="{x:Null}">
-                <Image Source="/Assets/Flags/globe.png" Width="32" Height="32" Stretch="Uniform"/>
-            </Button>
+
+
+
+
+
+
+
+            <!-- Grid.Column=1 — просто простір -->
+    
+    <!-- Інші кнопки — ПРАВОРУЧ -->
+    <StackPanel Orientation="Horizontal" HorizontalAlignment="Right" Grid.Column="3">
+        <!-- Кнопка профілю -->
+        <Button Width="34" Height="34" Margin="4,0" 
+                ToolTip="{lex:Loc CurConvApp:Resources:UserProfileWindowName}"
+                Click="ProfileButton_Click" Background="Transparent" BorderBrush="{x:Null}">
+            <Image Source="/Assets/Flags/profile.png" Width="28" Height="28"/>
+        </Button>
+        
+        <!-- Кнопка зміни теми -->
+        <Button Width="34" Height="34" Margin="4,0" 
+                ToolTip="{lex:Loc CurConvApp:Resources:ch_th_}"
+                Click="ThemeButton_Click" Background="Transparent" BorderBrush="{x:Null}">
+            <Image Source="/Assets/Flags/theme.png" Width="28" Height="28"/>
+        </Button>
+        
+        <!-- Кнопка вибору мови -->
+        <Button Width="34" Height="34" Margin="4,0" 
+                ToolTip="{lex:Loc CurConvApp:Resources:lang_}"
+                Click="ChangeLanguage_Click" Background="Transparent" BorderBrush="{x:Null}">
+            <Image Source="/Assets/Flags/globe.png" Width="28" Height="28"/>
+        </Button>
+        
+        <!-- Кнопка інформації -->
+        <Button Width="34" Height="34" Margin="4,0" 
+                ToolTip="{lex:Loc CurConvApp:Resources:inf_}"
+                Click="InfoButton_Click" Background="Transparent" BorderBrush="{x:Null}">
+            <Image Source="/Assets/Flags/info.png" Width="28" Height="28"/>
+        </Button>
+
+                <!-- Кнопка виходу з програми -->
+        <Button Width="34" Height="34" Margin="4,0" 
+                ToolTip="{lex:Loc CurConvApp:Resources:exit}"
+                Click="ExitButton_Click" Background="Transparent" BorderBrush="{x:Null}">
+                    <Image Source="/Assets/Flags/exit.png" Width="28" Height="28"/>
+        </Button>
+            </StackPanel>
+</Grid>
+
+        <!-- TITLE -->
+        <TextBlock Grid.Row="1" Text="{lex:Loc CurConvApp:Resources:ConvertTite}"
+                   FontSize="22" FontWeight="Bold" HorizontalAlignment="Center"
+                   Foreground="{DynamicResource PrimaryTextBrush}"
+                   Margin="0,0,0,18"/>
+
+        <!-- CONTROLS: Сума, валюти, конвертація -->
+        <StackPanel Grid.Row="2" Orientation="Horizontal" HorizontalAlignment="Center" Margin="0,0,0,16">
+            <TextBlock Text="{lex:Loc CurConvApp:Resources:tot_}" VerticalAlignment="Center" Margin="0,0,7,0"
+                       Foreground="{DynamicResource PrimaryTextBrush}"/>
+            <TextBox Width="80" Text="{Binding InputAmount, UpdateSourceTrigger=PropertyChanged}" Margin="0,0,12,0"/>
+
+            <ComboBox Width="100" 
+                      ItemsSource="{Binding CurrencyRates}" 
+                      SelectedItem="{Binding FromCurrency}"
+                      DisplayMemberPath="CurrencyCodeL" Margin="0,0,12,0"/>
+
+            <TextBlock Text="→" VerticalAlignment="Center" Margin="0,0,12,0"
+                       Foreground="{DynamicResource PrimaryTextBrush}"/>
+
+            <ComboBox Width="100" 
+                      ItemsSource="{Binding CurrencyRates}" 
+                      SelectedItem="{Binding ToCurrency}"
+                      DisplayMemberPath="CurrencyCodeL" Margin="0,0,12,0"/>
+
+            <Button Content="{lex:Loc CurConvApp:Resources:conv_}" 
+                    Foreground="{DynamicResource PrimaryTextBrush}"
+                    Width="120" Command="{Binding ConvertCommand}"/>
         </StackPanel>
 
+        <!-- RESULT -->
+        <TextBlock Grid.Row="3" FontWeight="Bold" FontSize="16"
+                   Text="{Binding ConversionResult}" Foreground="DarkGreen"
+                   HorizontalAlignment="Center" Margin="0,0,0,8"/>
 
-        <StackPanel Margin="10" Orientation="Vertical" HorizontalAlignment="Left">
-
-            <!-- Кнопка ручного завантаження -->
-            <Button Content="{lex:Loc CurConvApp:Resources:d_NBU_e_r_m}"
-            Command="{Binding LoadRatesCommand}"
-            Width="250"
-            Margin="0,0,0,10"/>
-
-            <Button Content="{lex:Loc CurConvApp:Resources:s_c_s}" 
-            Command="{Binding ShowChartCommand}" 
-            Width="250"
-            Margin="0,0,0,10"/>
-
-
-            <TextBlock Text="{Binding TimeLeft}"
-            Foreground="Gray"
-            FontWeight="Bold"
-            FontSize="12"
-            Margin="0,10,0,0"/>
-
-            <StackPanel Orientation="Horizontal" Margin="0,0,0,10">
-                <TextBlock Text="{lex:Loc CurConvApp:Resources:tot_}" VerticalAlignment="Center" Margin="0,0,5,0"/>
-                <TextBox Width="100" Text="{Binding InputAmount, UpdateSourceTrigger=PropertyChanged}" Margin="0,0,10,0"/>
-
-                <ComboBox Width="100"
-                ItemsSource="{Binding CurrencyRates}"
-                SelectedItem="{Binding FromCurrency}"
-                DisplayMemberPath="CurrencyCodeL"
-                Margin="0,0,10,0"/>
-
-                <TextBlock Text="→" VerticalAlignment="Center" Margin="0,0,10,0"/>
-
-                <ComboBox Width="100"
-                ItemsSource="{Binding CurrencyRates}"
-                SelectedItem="{Binding ToCurrency}"
-                DisplayMemberPath="CurrencyCodeL"/>
-            </StackPanel>
-
-            <!-- Кнопка конвертації -->
-            <Button Content="{lex:Loc CurConvApp:Resources:conv_}"
-          Width="120"
-          Command="{Binding ConvertCommand}"
-          Margin="0,0,0,10"/>
-
-            <!-- Виведення результату конвертації -->
-            <TextBlock FontWeight="Bold"
-             FontSize="14"
-             Text="{Binding ConversionResult}"
-             Foreground="DarkGreen"/>
-
-            <!-- Статусне повідомлення -->
-            <TextBlock Text="{Binding StatusMessage}"
-             Foreground="DarkBlue"
-             FontWeight="Bold"
-             FontSize="12"
-             Margin="0,10,0,0"/>
-
-
-            <ListView ItemsSource="{Binding CurrencyRates}" Margin="10">
-                <ListView.Resources>
-                    <!-- Візуальний стиль заголовків -->
-                    <Style TargetType="GridViewColumnHeader">
-                        <Setter Property="FontWeight" Value="Bold" />
-                        <Setter Property="Foreground" Value="DarkBlue" />
-                        <Setter Property="FontSize" Value="14"/>
-                    </Style>
-                    <!-- Ефекти наведення -->
-                    <Style TargetType="ListViewItem">
-                        <Setter Property="Background" Value="Transparent"/>
-                        <Setter Property="Cursor" Value="Hand"/>
-                        <Setter Property="Margin" Value="2"/>
-                        <Style.Triggers>
-                            <Trigger Property="IsMouseOver" Value="True">
-                                <Setter Property="Background" Value="#FFE0F7FF"/>
-                            </Trigger>
-                        </Style.Triggers>
-                    </Style>
-                </ListView.Resources>
-
+        <!-- CURRENCY TABLE -->
+        <Border Grid.Row="4" CornerRadius="8" BorderBrush="{DynamicResource BorderBrushMain}" BorderThickness="1" Padding="10" >
+            <ListView ItemsSource="{Binding CurrencyRatesForListView}" Background="{DynamicResource MainBackgroundBrush}">
                 <ListView.View>
                     <GridView>
-                        <!-- Валюта + прапор -->
-                        <GridViewColumn Header="{lex:Loc CurConvApp:Resources:curr_2}" Width="140">
+                        <GridViewColumn Header="{lex:Loc CurConvApp:Resources:curr_2}" Width="120">
                             <GridViewColumn.CellTemplate>
                                 <DataTemplate>
                                     <StackPanel Orientation="Horizontal" VerticalAlignment="Center">
-                                        <Image Width="32" Height="20" Margin="0,0,5,0"
-                              Source="{Binding CurrencyCodeL, Converter={StaticResource LowercaseToImagePathConverter}}" />
-
-                                        <TextBlock Text="{Binding CurrencyCodeL}" VerticalAlignment="Center"/>
+                                        <Image Width="28" Height="18" Margin="0,0,5,0"
+                                               Source="{Binding CurrencyCodeL, Converter={StaticResource LowercaseToImagePathConverter}}" />
+                                        <TextBlock Text="{Binding CurrencyCodeL}" VerticalAlignment="Center"
+                                                   Foreground="{DynamicResource PrimaryTextBrush}"/>
                                     </StackPanel>
                                 </DataTemplate>
                             </GridViewColumn.CellTemplate>
                         </GridViewColumn>
-
-                        <GridViewColumn Header="{lex:Loc CurConvApp:Resources:am_}" Width="100" DisplayMemberBinding="{Binding Units}" />
-                        <GridViewColumn Header="{lex:Loc CurConvApp:Resources:e_r}" Width="100" DisplayMemberBinding="{Binding Amount, StringFormat=0.00}" />
+                        <GridViewColumn Header="{lex:Loc CurConvApp:Resources:am_}" Width="75" DisplayMemberBinding="{Binding Units}" />
+                        <GridViewColumn Header="{lex:Loc CurConvApp:Resources:e_r}" Width="95" DisplayMemberBinding="{Binding Amount, StringFormat=0.00}" />
                         <GridViewColumn Header="{lex:Loc CurConvApp:Resources:date_}" Width="120" DisplayMemberBinding="{Binding StartDate}" />
                     </GridView>
                 </ListView.View>
             </ListView>
+        </Border>
 
+        <!-- STATUS / TIMER -->
+        <TextBlock Grid.Row="5" Text="{Binding StatusMessage}" 
+                   Foreground="{DynamicResource SecondaryTextBrush}"
+                   FontWeight="Bold" FontSize="13" Margin="0,10,0,0"/>
 
-        </StackPanel>
+        <!--<Grid>-->
+            
+             <!--POP-UP повідомлення-->
+            <Border x:Name="Snackbar"
+            Background="#CC333333"
+            CornerRadius="8"
+            Padding="16,8"
+            Visibility="Collapsed"
+            Opacity="0"
+            HorizontalAlignment="Center"
+            VerticalAlignment="Center"
+            Margin="0">
+                <TextBlock x:Name="SnackbarText"
+                   Foreground="White"
+                   FontSize="15"
+                   FontWeight="SemiBold"/>
+            </Border>
+        <!--</Grid>-->
 
     </Grid>
 </UserControl>
+    

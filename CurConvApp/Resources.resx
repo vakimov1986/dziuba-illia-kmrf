@@ -278,4 +278,16 @@
     <value>History</value>
     <comment>UserProfileWindow</comment>
   </data>
+  <data name="ConvertTite" xml:space="preserve">
+    <value>Currency conversion</value>
+    <comment>CurrencyConverterView</comment>
+  </data>
+  <data name="Exit" xml:space="preserve">
+    <value>Exit</value>
+    <comment>CurrencyConverterView</comment>
+  </data>
+  <data name="forecast_" xml:space="preserve">
+    <value>Forecast</value>
+    <comment>CurrencyConverterView</comment>
+  </data>
 </root>

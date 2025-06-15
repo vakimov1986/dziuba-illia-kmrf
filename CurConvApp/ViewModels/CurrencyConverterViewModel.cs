@@ -12,13 +12,19 @@ using Microsoft.EntityFrameworkCore;
 using Microsoft.Extensions.Configuration;
 
 namespace CurConvApp.ViewModels
+
 {
+
     public partial class CurrencyConverterViewModel : ObservableObject
     {
         private readonly CurrencyApiClient _apiClient;
         private readonly DispatcherTimer _autoLoadTimer;
         private readonly DispatcherTimer _uiTimer;
         private DateTime _nextUpdateTime;
+
+        public ObservableCollection<CurrencyRate> CurrencyRatesForListView { get; } = new();
+        public ObservableCollection<CurrencyRateRecord> CurrencyRatesHistory { get; } = new();
+
 
         public CurrencyConverterViewModel()
         {
@@ -29,7 +35,7 @@ namespace CurConvApp.ViewModels
             {
                 Interval = TimeSpan.FromHours(1) // оновлювати курси (щогодини)
             };
-            _autoLoadTimer.Tick += async (s, e) => await LoadAndSaveRatesAsync("Автоматичне");
+            _autoLoadTimer.Tick += async (s, e) => await LoadAndSaveRatesAsync("Автономне");
             _autoLoadTimer.Start();
 
             _nextUpdateTime = DateTime.Now.AddHours(1);
@@ -44,7 +50,7 @@ namespace CurConvApp.ViewModels
             _ = AutoLoadRatesAsync();
 
             // Перший запуск при старті програми
-            _ = LoadAndSaveRatesAsync("Автоматичне (перший запуск)");
+            _ = LoadAndSaveRatesAsync("Автономне (перший запуск)");
         }
 
         [ObservableProperty]
@@ -134,27 +140,66 @@ namespace CurConvApp.ViewModels
             }
         }
 
-
+        public event Action? ShowChartRequested;
 
         [RelayCommand]
         private void ShowChart()
         {
-            var chartView = new Views.CurrencyRateChartView();
-            var window = new System.Windows.Window
-            {
-                Title = "Графік зміни курсу",
-                Content = chartView,
-                Width = 800,
-                Height = 500
-            };
-            window.ShowDialog();
+            ShowChartRequested?.Invoke();
         }
 
-
+        [RelayCommand]
+        private void ShowHistory()
+        {
+            var user = UserSessionManager.Instance.CurrentUser;
+            if (user == null)
+            {
+                System.Windows.MessageBox.Show("Користувач не авторизований!");
+                return;
+            }
+            // owner = null — якщо немає прямого доступу до вікна, або можна пробросити
+            HistoryWindowService.ShowHistoryWindow(user.Id, null);
+        }
 
         /// <summary>
         /// Єдиний DRY метод для обох режимів
         /// </summary>
+        /// 
+
+        [RelayCommand]
+        private void ForecastRate()
+        {
+            if (ToCurrency == null)
+            {
+                StatusMessage = "Оберіть валюту для прогнозу.";
+                return;
+            }
+            LoadCurrencyHistory(ToCurrency.CurrencyCodeL);
+
+            if (CurrencyRatesHistory.Count < 2)
+            {
+                StatusMessage = "Недостатньо даних для прогнозу.";
+                return;
+            }
+
+            var recentRates = CurrencyRatesHistory
+                .OrderBy(r => r.StartDate)
+                .Select(r => r.Amount)
+                .ToList();
+
+            decimal sumDelta = 0;
+            for (int i = 1; i < recentRates.Count; i++)
+                sumDelta += (recentRates[i] - recentRates[i - 1]);
+
+            decimal avgDelta = sumDelta / (recentRates.Count - 1);
+            decimal forecast = recentRates.Last() + avgDelta;
+
+            StatusMessage = $"Прогноз курсу {ToCurrency.CurrencyCodeL} на завтра: {forecast:F4}";
+            //
+           // StatusMessage = $"Прогноз курсу ...";
+            ShowSnackbar(StatusMessage);
+        }
+
         private async Task LoadAndSaveRatesAsync(string source)
         {
             try
@@ -164,9 +209,32 @@ namespace CurConvApp.ViewModels
                     .Where(r => AllowedCurrencies.Contains(r.CurrencyCodeL))
                     .OrderBy(r => r.CurrencyCodeL);
 
+                // Додаємо гривню
+                var rateList = filtered.ToList();
+                if (!rateList.Any(r => r.CurrencyCodeL == "UAH"))
+                {
+                    rateList.Insert(0, new CurrencyRate
+                    {
+                        CurrencyCodeL = "UAH",
+                        Units = 1,
+                        Amount = 1,
+                        // StartDate = DateTime.Now.ToString("yyyy-MM-dd")
+                    });
+                }
+
                 CurrencyRates.Clear();
-                foreach (var rate in filtered)
+                foreach (var rate in rateList)
                     CurrencyRates.Add(rate);
+
+                // ОНОВЛЕННЯ CurrencyRatesForListView (без UAH)
+                CurrencyRatesForListView.Clear();
+                foreach (var rate in rateList.Where(r => r.CurrencyCodeL != "UAH"))
+                    CurrencyRatesForListView.Add(rate);
+                //UAH
+
+                //CurrencyRates.Clear();
+                //foreach (var rate in filtered)
+                //    CurrencyRates.Add(rate);
 
                 var dbContext = new AppDbContext(new DbContextOptionsBuilder<AppDbContext>()
                     .UseSqlServer(App.AppConfiguration.GetConnectionString("DefaultConnection"))
@@ -175,7 +243,7 @@ namespace CurConvApp.ViewModels
                 var rateService = new CurrencyRateService(dbContext);
                 rateService.SaveRates(filtered);
 
-                StatusMessage = $"{source} оновлення курсів та збереження ({DateTime.Now:HH:mm:ss})";
+                StatusMessage = $"{source} оновлено ({DateTime.Now:yyyy-MM-dd HH:mm:ss})";
                 _nextUpdateTime = DateTime.Now.AddHours(1);
                 UpdateTimeLeft();
             }
@@ -224,9 +292,33 @@ namespace CurConvApp.ViewModels
                 .Where(r => AllowedCurrencies.Contains(r.CurrencyCodeL))
                 .OrderBy(r => r.CurrencyCodeL);
 
+            // Додаємо UAH, якщо її нема
+            var rateList = filtered.ToList();
+
+            if (!rateList.Any(r => r.CurrencyCodeL == "UAH"))
+            {
+                rateList.Insert(0, new CurrencyRate
+                {
+                    CurrencyCodeL = "UAH",
+                    Units = 1,
+                    Amount = 1,
+                    //  StartDate = DateTime.Now.ToString("yyyy-MM-dd")
+                });
+            }
+
             CurrencyRates.Clear();
-            foreach (var rate in filtered)
+            foreach (var rate in rateList)
                 CurrencyRates.Add(rate);
+
+            // ОНОВЛЕННЯ CurrencyRatesForListView (без UAH)
+            CurrencyRatesForListView.Clear();
+            foreach (var rate in rateList.Where(r => r.CurrencyCodeL != "UAH"))
+                CurrencyRatesForListView.Add(rate);
+            //  UAH
+
+            //CurrencyRates.Clear();
+            //foreach (var rate in filtered)
+            //    CurrencyRates.Add(rate);
 
             var dbContext = new AppDbContext(new DbContextOptionsBuilder<AppDbContext>()
                 .UseSqlServer(App.AppConfiguration.GetConnectionString("DefaultConnection"))
@@ -235,10 +327,40 @@ namespace CurConvApp.ViewModels
             var rateService = new CurrencyRateService(dbContext);
             rateService.SaveRates(filtered);
 
-            StatusMessage = $"Курси оновлено та збережено ({DateTime.Now:HH:mm:ss})";
+            StatusMessage = $"Оновлено ({DateTime.Now:yyyy-MM-dd HH:mm:ss})";
+
         }
 
+        private void LoadCurrencyHistory(string currencyCode)
+        {
+            CurrencyRatesHistory.Clear();
 
+            var options = new DbContextOptionsBuilder<AppDbContext>()
+                .UseSqlServer(App.AppConfiguration.GetConnectionString("DefaultConnection"))
+                .Options;
 
+            using (var db = new AppDbContext(options))
+            {
+                var history = db.CurrencyRateRecords
+                    .Where(r => r.CurrencyCodeL == currencyCode)
+                    .OrderByDescending(r => r.StartDate)
+                    .Take(7)
+                    .ToList();
+
+                foreach (var rate in history)
+                    CurrencyRatesHistory.Add(rate);
+            }
+        }
+        
+        //pop-up
+        public event Action<string>? SnackbarRequested;
+
+        //метод для виклику pop-up
+        private void ShowSnackbar(string message)
+        {
+            SnackbarRequested?.Invoke(message);
+        }
+
+        
     }
 }

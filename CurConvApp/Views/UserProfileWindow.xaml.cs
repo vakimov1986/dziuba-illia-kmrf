@@ -18,6 +18,8 @@ namespace CurConvApp.Views
             NameBox.Text = user.Name;
             SurnameBox.Text = user.Surname;
             EmailBox.Text = user.Email;
+
+            this.DataContext = new UserProfileViewModel();
         }
 
         private void Save_Click(object sender, RoutedEventArgs e)
@@ -85,12 +87,12 @@ namespace CurConvApp.Views
             this.Close();
         }
 
-        private void ShowHistory_Click(object sender, RoutedEventArgs e)
-        {
-            var historyWindow = new HistoryWindow(_user.Id);
-            historyWindow.Owner = this;
-            historyWindow.ShowDialog();
-        }
+        //private void ShowHistory_Click(object sender, RoutedEventArgs e)
+        //{
+        //    var historyWindow = new HistoryWindow(_user.Id);
+        //    historyWindow.Owner = this;
+        //    historyWindow.ShowDialog();
+        //}
 
 
     }

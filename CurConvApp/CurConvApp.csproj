@@ -14,9 +14,12 @@
 
   <ItemGroup>
     <None Remove="appsettings.json" />
+    <None Remove="Assets\Flags\chart.png" />
     <None Remove="Assets\Flags\chf.png" />
     <None Remove="Assets\Flags\czk.png" />
     <None Remove="Assets\Flags\eur.png" />
+    <None Remove="Assets\Flags\exit.png" />
+    <None Remove="Assets\Flags\forecast.png" />
     <None Remove="Assets\Flags\gbp.png" />
     <None Remove="Assets\Flags\globe.png" />
     <None Remove="Assets\Flags\history.png" />
@@ -39,6 +42,11 @@
   </ItemGroup>
 
   <ItemGroup>
+    <Resource Include="Assets\Flags\chart.png" />
+    <Resource Include="Assets\Flags\exit.png" />
+    <Resource Include="Assets\Flags\forecast.png">
+      <CopyToOutputDirectory>Never</CopyToOutputDirectory>
+    </Resource>
     <Resource Include="Assets\Flags\globe.png" />
     <Resource Include="Assets\Flags\history.png" />
     <Resource Include="Assets\Flags\info.png">
@@ -69,7 +77,10 @@
     <PackageReference Include="Microsoft.Extensions.Configuration" Version="9.0.5" />
     <PackageReference Include="Microsoft.Extensions.Configuration.Binder" Version="9.0.5" />
     <PackageReference Include="Microsoft.Extensions.Configuration.Json" Version="9.0.5" />
+    <PackageReference Include="OxyPlot.Core" Version="2.2.0" />
+    <PackageReference Include="OxyPlot.SkiaSharp" Version="2.2.0" />
     <PackageReference Include="OxyPlot.Wpf" Version="2.2.0" />
+    <PackageReference Include="PdfSharpCore" Version="1.3.67" />
     <PackageReference Include="QuestPDF" Version="2025.5.0" />
     <PackageReference Include="WPFLocalizeExtension" Version="3.10.0" />
   </ItemGroup>

@@ -23,10 +23,34 @@ namespace CurConvApp.Views
         public CurrencyConverterView()
         {
             InitializeComponent();
-            DataContext = new CurrencyConverterViewModel();
 
+            SubscribeToViewModelEvents();
+
+            this.DataContextChanged += (s, e) =>
+            {
+                SubscribeToViewModelEvents();
+            };
         }
 
+        private void SubscribeToViewModelEvents()
+        {
+            if (DataContext is CurrencyConverterViewModel vm)
+            {
+                vm.SnackbarRequested -= ShowSnackbarPublic; // Щоб не підписувати двічі
+                vm.SnackbarRequested += ShowSnackbarPublic;
+
+                vm.ShowChartRequested -= OpenChartWindow;
+                vm.ShowChartRequested += OpenChartWindow;
+            }
+        }
+
+
+        private void OpenChartWindow()
+        {
+            var win = new CurrencyRateChartWindow();
+            win.ShowDialog();
+        }
+        public void ShowSnackbarPublic(string message) => ShowSnackbar(message);
         private void ProfileButton_Click(object sender, RoutedEventArgs e)
         {
             var user = UserSessionManager.Instance.CurrentUser;
@@ -83,6 +107,38 @@ namespace CurConvApp.Views
                 WPFLocalizeExtension.Engine.LocalizeDictionary.Instance.Culture = new System.Globalization.CultureInfo("en");
             else
                 WPFLocalizeExtension.Engine.LocalizeDictionary.Instance.Culture = new System.Globalization.CultureInfo("uk-UA");
+        }
+        
+
+        //метод для показу pop-up
+        private async void ShowSnackbar(string message)
+        {
+            SnackbarText.Text = message;
+            Snackbar.Visibility = Visibility.Visible;
+
+            // Fade in
+            var fadeIn = new System.Windows.Media.Animation.DoubleAnimation(0, 1, TimeSpan.FromMilliseconds(200));
+            Snackbar.BeginAnimation(OpacityProperty, fadeIn);
+
+            await Task.Delay(2500); // 2.5 секунди
+
+            // Fade out
+            var fadeOut = new System.Windows.Media.Animation.DoubleAnimation(1, 0, TimeSpan.FromMilliseconds(500));
+            Snackbar.BeginAnimation(OpacityProperty, fadeOut);
+
+            await Task.Delay(600); // Після анімації
+            Snackbar.Visibility = Visibility.Collapsed;
+        }
+
+
+        private void ExitButton_Click(object sender, RoutedEventArgs e)
+        {
+            // Питання підтвердження (опціонально)
+            if (MessageBox.Show("Вийти з програми?", "Підтвердження виходу",
+                                MessageBoxButton.YesNo, MessageBoxImage.Question) == MessageBoxResult.Yes)
+            {
+                Application.Current.Shutdown(); // Коректне завершення роботи WPF-додатку
+            }
         }
 
     }

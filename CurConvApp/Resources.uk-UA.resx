@@ -237,4 +237,13 @@
   <data name="ShowHistory" xml:space="preserve">
     <value>Історія</value>
   </data>
+  <data name="ConvertTite" xml:space="preserve">
+    <value>Конвертація валют</value>
+  </data>
+  <data name="Exit" xml:space="preserve">
+    <value>Вийти з програми</value>
+  </data>
+  <data name="forecast_" xml:space="preserve">
+    <value>Прогноз</value>
+  </data>
 </root>

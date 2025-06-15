@@ -1,5 +1,6 @@
 ﻿using QuestPDF.Fluent;
 using QuestPDF.Infrastructure;
+using QuestPDF.Helpers;
 using System.Collections.Generic;
 using System;
 using CurConvApp.Models;
@@ -13,12 +14,14 @@ namespace CurConvApp.Reports
         private readonly DateTime startDate;
         private readonly DateTime endDate;
 
+
         public CurrencyRatePdfReport(string currency, List<CurrencyRateRecord> rates, DateTime startDate, DateTime endDate)
         {
             this.currency = currency;
             this.rates = rates;
             this.startDate = startDate;
             this.endDate = endDate;
+
         }
 
         public DocumentMetadata GetMetadata() => DocumentMetadata.Default;
@@ -63,5 +66,50 @@ namespace CurConvApp.Reports
                         .Text($"Згенеровано: {DateTime.Now:dd.MM.yyyy HH:mm}");
                 });
         }
+
+        //pdf з малюнком
+        public static void ExportToPdfWithImage(string filePath, string chartImagePath, List<CurrencyRateRecord> history)
+        {
+            Document.Create(container =>
+            {
+                container.Page(page =>
+                {
+                    page.Size(PageSizes.A4.Landscape());
+                    page.Margin(30);
+
+                    page.Content().Column(col =>
+                    {
+                        col.Item().Text("Історія курсу валют").FontSize(24).SemiBold();
+
+                        // Додаємо зображення графіка
+                        col.Item().Image(chartImagePath, ImageScaling.FitWidth);
+
+                        // Додаємо таблицю з історією (приклад)
+                        col.Item().Table(table =>
+                        {
+                            table.ColumnsDefinition(columns =>
+                            {
+                                columns.ConstantColumn(120);
+                                columns.ConstantColumn(100);
+                            });
+
+                            table.Header(header =>
+                            {
+                                header.Cell().Text("Дата").SemiBold();
+                                header.Cell().Text("Курс").SemiBold();
+                            });
+
+                            foreach (var rec in history)
+                            {
+                                table.Cell().Text($"{rec.StartDate:dd.MM.yyyy}");
+                                table.Cell().Text($"{rec.Amount}");
+                            }
+                        });
+                    });
+                });
+            })
+            .GeneratePdf(filePath);
+        }
+
     }
 }
