@@ -3,7 +3,7 @@
         xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
         xmlns:lex="http://wpflocalizeextension.codeplex.com"
         xmlns:vm="clr-namespace:CurConvApp.ViewModels"
-        Title="{lex:Loc CurConvApp:Resources:UserProfileWindowName}" Height="430" Width="370"
+        Title="{lex:Loc CurConvApp:Resources:UserProfileWindowName}" Height="470" Width="370"
         WindowStartupLocation="CenterScreen">
 
     
@@ -75,7 +75,7 @@
         </Grid>
 
         <!-- Кнопки зберегти/скасувати -->
-        <StackPanel Grid.Row="3" Orientation="Horizontal" HorizontalAlignment="Center">
+        <StackPanel Grid.Row="4" Orientation="Horizontal" HorizontalAlignment="Center">
             <Button Content="{lex:Loc CurConvApp:Resources:save_butt}" Width="100" Margin="0,0,8,0" Click="Save_Click"/>
             <Button Content="{lex:Loc CurConvApp:Resources:cancel_butt}" Width="100" Click="Cancel_Click"/>
         </StackPanel>
