@@ -1,4 +1,5 @@
 ﻿using System.ComponentModel.DataAnnotations;
+using System.Windows;
 using CommunityToolkit.Mvvm.ComponentModel;
 using CommunityToolkit.Mvvm.Input;
 using CurConvApp.Models;
@@ -15,6 +16,13 @@ namespace CurConvApp.ViewModels
     {
         private readonly Action<string> _navigate;
         private readonly IAuthService _authService;
+
+        //конструктор
+        public RegistrationViewModel(IAuthService authService, Action<string> navigate)
+        {
+            _navigate = navigate;
+            _authService = authService;
+        }
 
         //or we can use more simplier variant
         [ObservableProperty]
@@ -42,13 +50,7 @@ namespace CurConvApp.ViewModels
         [ObservableProperty] 
         private string message = string.Empty;
         
-        //конструктор
-        public RegistrationViewModel(IAuthService authService, Action<string> navigate)
-        {
-            _navigate = navigate;
-            _authService = authService;
-        }
-
+        
         [RelayCommand]
         private void GoToLogin()
         {
@@ -61,10 +63,14 @@ namespace CurConvApp.ViewModels
 
             ValidateAllProperties();
 
+            ShowAllErrors();
+
             if (HasErrors)
             {
                 return;
             }
+
+
             //if (string.IsNullOrWhiteSpace(Email) || string.IsNullOrWhiteSpace(Password))
             //{
             //    Message = "Email і пароль обов’язкові.";
@@ -121,5 +127,28 @@ namespace CurConvApp.ViewModels
             //Message = "Вхід успішний.";
             //_navigate("Converter"); // ПЕРЕХІД до конвертера
         }
+
+        public void ShowAllErrors()
+        {
+            var props = new[] { nameof(Name), nameof(Surname), nameof(Email), nameof(Password) };
+            string errorText = "";
+
+            foreach (var prop in props)
+            {
+                var errs = GetErrors(prop);
+                if (errs != null)
+                {
+                    foreach (var err in errs)
+                    {
+                        errorText += $"Поле {prop}: {err}\n";
+                    }
+                }
+            }
+
+            if (!string.IsNullOrWhiteSpace(errorText))
+                System.Windows.MessageBox.Show(errorText, "Помилки валідації", MessageBoxButton.OK, MessageBoxImage.Warning);
+        }
+
+
     }
 }

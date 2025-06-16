@@ -46,7 +46,7 @@
             <!-- Кнопка показу графіка -->
             <Button Width="34" Height="34" Margin="0,0,8,0"
             ToolTip="{lex:Loc CurConvApp:Resources:s_c_s}"
-            Command="{Binding ShowChartCommand}" Background="Transparent" BorderBrush="{x:Null}" Grid.Column="0">
+            Command="{Binding ShowChartCommand}" Background="Transparent" BorderBrush="{x:Null}" Grid.Column="0" Padding="0">
                 <Image Source="/Assets/Flags/chart.png" Width="28" Height="28"/>
             </Button>
 
@@ -54,14 +54,14 @@
             <Button Width="34" Height="34" Margin="0,0,4,0"
             ToolTip="{lex:Loc CurConvApp:Resources:ShowHistory}"
             Command="{Binding ShowHistoryCommand}"
-            Background="Transparent" BorderBrush="{x:Null}" Grid.Column="1">
+            Background="Transparent" BorderBrush="{x:Null}" Grid.Column="1" Padding="0">
                 <Image Source="/Assets/Flags/history.png" Width="28" Height="28"/>
             </Button>
 
             <Button Width="34" Height="34" Margin="4,0"
             ToolTip="{lex:Loc CurConvApp:Resources:forecast_}"
             Command="{Binding ForecastRateCommand}"
-            Background="Transparent" BorderBrush="{x:Null}" Grid.Column="2">
+            Background="Transparent" BorderBrush="{x:Null}" Grid.Column="2" Padding="0">
                 <Image Source="/Assets/Flags/forecast.png" Width="28" Height="28"/>
             </Button>
 
@@ -78,35 +78,35 @@
         <!-- Кнопка профілю -->
         <Button Width="34" Height="34" Margin="4,0" 
                 ToolTip="{lex:Loc CurConvApp:Resources:UserProfileWindowName}"
-                Click="ProfileButton_Click" Background="Transparent" BorderBrush="{x:Null}">
+                Click="ProfileButton_Click" Background="Transparent" BorderBrush="{x:Null}" Padding="0">
             <Image Source="/Assets/Flags/profile.png" Width="28" Height="28"/>
         </Button>
         
         <!-- Кнопка зміни теми -->
         <Button Width="34" Height="34" Margin="4,0" 
                 ToolTip="{lex:Loc CurConvApp:Resources:ch_th_}"
-                Click="ThemeButton_Click" Background="Transparent" BorderBrush="{x:Null}">
+                Click="ThemeButton_Click" Background="Transparent" BorderBrush="{x:Null}" Padding="0">
             <Image Source="/Assets/Flags/theme.png" Width="28" Height="28"/>
         </Button>
         
         <!-- Кнопка вибору мови -->
         <Button Width="34" Height="34" Margin="4,0" 
                 ToolTip="{lex:Loc CurConvApp:Resources:lang_}"
-                Click="ChangeLanguage_Click" Background="Transparent" BorderBrush="{x:Null}">
+                Click="ChangeLanguage_Click" Background="Transparent" BorderBrush="{x:Null}" Padding="0">
             <Image Source="/Assets/Flags/globe.png" Width="28" Height="28"/>
         </Button>
         
         <!-- Кнопка інформації -->
         <Button Width="34" Height="34" Margin="4,0" 
                 ToolTip="{lex:Loc CurConvApp:Resources:inf_}"
-                Click="InfoButton_Click" Background="Transparent" BorderBrush="{x:Null}">
+                Click="InfoButton_Click" Background="Transparent" BorderBrush="{x:Null}" Padding="0">
             <Image Source="/Assets/Flags/info.png" Width="28" Height="28"/>
         </Button>
 
                 <!-- Кнопка виходу з програми -->
         <Button Width="34" Height="34" Margin="4,0" 
                 ToolTip="{lex:Loc CurConvApp:Resources:exit}"
-                Click="ExitButton_Click" Background="Transparent" BorderBrush="{x:Null}">
+                Click="ExitButton_Click" Background="Transparent" BorderBrush="{x:Null}" Padding="0">
                     <Image Source="/Assets/Flags/exit.png" Width="28" Height="28"/>
         </Button>
             </StackPanel>
@@ -139,7 +139,7 @@
 
             <Button Content="{lex:Loc CurConvApp:Resources:conv_}" 
                     Foreground="{DynamicResource PrimaryTextBrush}"
-                    Width="120" Command="{Binding ConvertCommand}"/>
+                    Width="130" Command="{Binding ConvertCommand}"/>
         </StackPanel>
 
         <!-- RESULT -->
@@ -164,9 +164,9 @@
                                 </DataTemplate>
                             </GridViewColumn.CellTemplate>
                         </GridViewColumn>
-                        <GridViewColumn Header="{lex:Loc CurConvApp:Resources:am_}" Width="75" DisplayMemberBinding="{Binding Units}" />
-                        <GridViewColumn Header="{lex:Loc CurConvApp:Resources:e_r}" Width="95" DisplayMemberBinding="{Binding Amount, StringFormat=0.00}" />
-                        <GridViewColumn Header="{lex:Loc CurConvApp:Resources:date_}" Width="120" DisplayMemberBinding="{Binding StartDate}" />
+                        <GridViewColumn Header="{lex:Loc CurConvApp:Resources:am_}" Width="130" DisplayMemberBinding="{Binding Units}" />
+                        <GridViewColumn Header="{lex:Loc CurConvApp:Resources:e_r}" Width="130" DisplayMemberBinding="{Binding Amount, StringFormat=0.00}" />
+                        <GridViewColumn Header="{lex:Loc CurConvApp:Resources:date_}" Width="130" DisplayMemberBinding="{Binding StartDate}" />
                     </GridView>
                 </ListView.View>
             </ListView>

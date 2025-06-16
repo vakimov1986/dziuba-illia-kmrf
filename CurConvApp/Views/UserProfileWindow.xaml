@@ -33,7 +33,8 @@
             <Button Width="36" Height="36" Grid.Column="1"
             ToolTip="{lex:Loc CurConvApp:Resources:ShowHistory}"
             Command="{Binding ShowHistoryCommand}"
-            Background="Transparent" BorderBrush="{x:Null}">
+            Background="Transparent" BorderBrush="{x:Null}"
+            Padding="0">
                 <Image Source="/Assets/Flags/history.png" Width="32" Height="32"/>
             </Button>
         </Grid>
